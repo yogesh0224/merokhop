@@ -3,247 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pregnancy Vaccines</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Trusted vaccine guidance for pregnant women and newborns in Nepal, ensuring safe pregnancies and healthy futures.">
+    <title>मेरो खोप - Empowering Healthy Futures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link rel="stylesheet" href="styles.css">
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [{
-            "@type": "Question",
-            "name": "What vaccines are recommended during pregnancy?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The recommended vaccines during pregnancy include Tdap, Flu, and COVID-19."
-            }
-          }]
-        }
-        </script>
 </head>
 <body>
-
-    <!-- Navbar -->
     <nav class="navbar">
-        <div class="navbar-logo">मेरो खोप </div>
-        <div class="hamburger" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+        <div class="navbar-brand">
+            <a href="#home" class="navbar-logo">मेरो खोप</a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#pregnancy-vaccines">Pregnancy Vaccines</a></li>
-            <li><a href="#faq">FAQs</a></li>
-            <li><a href="#resources">Resources</a></li>
-            
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item">
+                <a href="#pregnancy-vaccines" class="nav-link">Pregnancy Vaccines</a>
+            </li>
+            <li class="nav-item">
+                <a href="#scheduler" class="nav-link">Child Scheduler</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">More <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#faqs" class="dropdown-link">FAQs</a></li>
+                    <li><a href="#resources" class="dropdown-link">Resources</a></li>
+                    <li><a href="#testimonials" class="dropdown-link">Testimonials</a></li>
+                    <li><a href="#contact" class="dropdown-link">Contact Us</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a href="#login" class="nav-link login-btn">Login</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="home" class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title"><span id="typing-text">सुरक्षित खोप, <br>सुरक्षित भबिस्य। </span></h1>
-            <p class="hero-subtitle">"स्वस्थ ममता, सुरक्षित भविष्य: खोप गरौं, जीवन बचाउँ!"</p>
-            <div class="button-group">
-                <button class="hero-button" onclick="navigateTo('pregnancy-vaccines')">Learn More</button>
-                <button class="hero-button" onclick="navigateTo('faq')">FAQs</button>
+    <section id="home" class="hero-section">
+        <div class="hero-background">
+            <video autoplay muted loop class="hero-video">
+                <source src="videos/hero-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            <h1 class="hero-title">
+                <span class="nepal-font">सुरक्षित खोप, सुरक्षित भविष्य।</span>
+                <span class="english-font">Safe Vaccines, Healthy Futures</span>
+            </h1>
+            <p class="hero-subtitle">Empowering Nepali families with trusted vaccine guidance for thriving pregnancies and children.</p>
+            <div class="hero-cta">
+                <a href="#scheduler" class="hero-button primary">Get Your Schedule</a>
+                <a href="#pregnancy-vaccines" class="hero-button secondary">Discover Vaccines</a>
             </div>
         </div>
-        
-        <div class="hero-image">
-            <img src="banner.png" alt="Mother carrying child">
-        </div>
-    </header>
+    </section>
 
-    <!-- Pregnancy Vaccines Section -->
-<section id="pregnancy-vaccines" class="vaccines-section">
-    <h2 class="section-title">Pregnancy Vaccines</h2>
-    <div class="slider">
-        <div class="slider-container">
-            <div class="card">
-                <img src="tdap-vaccine.jpg" alt="Tdap Vaccine">
-                <h3 class="card-title">Tdap Vaccine</h3>
-                <p class="card-description">
-                    Protects against tetanus, diphtheria, and pertussis.<br>
-                    <strong>Recommended Timing:</strong> During the third trimester (27-36 weeks) of each pregnancy.
-                </p>
+    <section id="pregnancy-vaccines" class="vaccines-section" data-aos="fade-up">
+        <h2 class="section-title">Pregnancy Vaccines</h2>
+        <p class="section-subtitle">Protect yourself and your baby with these essential vaccines.</p>
+        <div class="swiper vaccine-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="vaccine-card">
+                        <img src="images/tdap.jpg" alt="Tdap Vaccine Illustration">
+                        <h3 class="card-title">Tdap Vaccine</h3>
+                        <p class="card-description">Protects against tetanus, diphtheria, and pertussis. Recommended during the third trimester (27-36 weeks).</p>
+                        <a href="#" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="vaccine-card">
+                        <img src="images/flu.jpg" alt="Flu Vaccine Illustration">
+                        <h3 class="card-title">Flu Vaccine</h3>
+                        <p class="card-description">Safeguards against influenza. Safe to administer anytime during pregnancy.</p>
+                        <a href="#" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="vaccine-card">
+                        <img src="images/covid19.jpg" alt="COVID-19 Vaccine Illustration">
+                        <h3 class="card-title">COVID-19 Vaccine</h3>
+                        <p class="card-description">Reduces severe illness risk. Consult your provider for timing.</p>
+                        <a href="#" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="vaccine-card">
+                        <img src="images/hepatitis-b.jpg" alt="Hepatitis B Vaccine Illustration">
+                        <h3 class="card-title">Hepatitis B Vaccine</h3>
+                        <p class="card-description">Prevents newborn transmission. Ideal before or during pregnancy if at risk.</p>
+                        <a href="#" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="vaccine-card">
+                        <img src="images/mmr.jpg" alt="MMR Vaccine Illustration">
+                        <h3 class="card-title">MMR Vaccine</h3>
+                        <p class="card-description">Protects against measles, mumps, and rubella. Check immunity before pregnancy.</p>
+                        <a href="#" class="card-link">Learn More</a>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <img src="flu-vaccine.jpg" alt="Flu Vaccine">
-                <h3 class="card-title">Flu Vaccine</h3>
-                <p class="card-description">
-                    Protects against influenza.<br>
-                    <strong>Recommended Timing:</strong> Anytime during pregnancy; ideally before flu season.
-                </p>
-            </div>
-            <div class="card">
-                <img src="covid-vaccine.jpg" alt="COVID-19 Vaccine">
-                <h3 class="card-title">COVID-19 Vaccine</h3>
-                <p class="card-description">
-                    Reduces the risk of severe illness from COVID-19.<br>
-                    <strong>Recommended Timing:</strong> As soon as eligible during pregnancy; consult your healthcare provider for guidance.
-                </p>
-            </div>
-            <div class="card">
-                <img src="heppatities-vaccine.webp" alt="Hepatitis B Vaccine">
-                <h3 class="card-title">Hepatitis B Vaccine</h3>
-                <p class="card-description">
-                    Prevents transmission of Hepatitis B to the newborn.<br>
-                    <strong>Recommended Timing:</strong> Ideally before pregnancy; if at risk, can be administered during pregnancy.
-                </p>
-            </div>
-            <div class="card">
-                <img src="mmr-vaccine.webp" alt="MMR Vaccine">
-                <h3 class="card-title">MMR Vaccine</h3>
-                <p class="card-description">
-                    Protects against measles, mumps, and rubella.<br>
-                    <strong>Recommended Timing:</strong> Before pregnancy; check immunity status with your doctor.
-                </p>
-            </div>
-            <!-- Add more cards as needed -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <button class="slider-button prev" onclick="moveSlider(-1)">&#10094;</button>
-        <button class="slider-button next" onclick="moveSlider(1)">&#10095;</button>
-    </div>
-</section>
+    </section>
 
-<section id="faq" class="faq-section">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="faq-container">
-        <div class="faq-item">
-            <button class="faq-question">What vaccines are recommended during pregnancy?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>The recommended vaccines during pregnancy include Tdap, Flu, and COVID-19. They help protect both the mother and baby from infections.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Why is the Tdap vaccine important for pregnant women?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>The Tdap vaccine protects against pertussis (whooping cough), which can be severe for newborns. Immunization during pregnancy ensures the baby receives antibodies for protection after birth.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">When is the best time to get the flu vaccine during pregnancy?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>The flu vaccine can be administered at any time during pregnancy, ideally before the start of flu season to maximize protection for both the mother and baby.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Is the COVID-19 vaccine safe during pregnancy?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>Yes, the COVID-19 vaccine is considered safe during pregnancy and is recommended to reduce the risk of severe illness. Consult your healthcare provider for specific guidance.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Are there any vaccines that should be avoided during pregnancy?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>Yes, live vaccines like MMR (measles, mumps, rubella) and varicella should generally be avoided during pregnancy. Consult with your healthcare provider before getting vaccinated.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">How do vaccines protect the baby during pregnancy?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>Vaccines help produce antibodies in the mother, which are passed to the baby, providing immunity until the baby is old enough to receive vaccinations directly.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Can I get vaccinated while breastfeeding?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>Most vaccines, including flu and COVID-19, are safe for breastfeeding mothers. Vaccination can continue to protect both mother and baby from infections.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">What should I do if I miss a recommended vaccine during pregnancy?<span class="plus-minus">+</span></button>
-            <div class="faq-answer">
-                <p>If you miss a recommended vaccine, consult your healthcare provider to discuss options. Some vaccines can still be administered postpartum to protect both mother and baby.</p>
-            </div>
-        </div>
-    </div>
-</section>
+    <section id="scheduler" class="scheduler-section" data-aos="fade-up">
+        <h2 class="section-title">Child Vaccine Scheduler</h2>
+        <p class="section-subtitle">Enter your child's date of birth for a personalized vaccine schedule based on Nepal's guidelines.</p>
+        <form id="scheduler-form" class="scheduler-form">
+            <label for="dob">Child's Date of Birth:</label>
+            <input type="date" id="dob" required aria-label="Child's date of birth">
+            <button type="submit" aria-label="Generate vaccine schedule">Generate Schedule</button>
+        </form>
+        <table id="schedule-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Vaccine</th>
+                    <th>Dose</th>
+                    <th>Recommended Age</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-body"></tbody>
+        </table>
+        <form id="notification-form" class="notification-form">
+            <h3>Stay Informed with Reminders</h3>
+            <input type="email" id="email" placeholder="Enter your email" required aria-label="Email for notifications">
+            <button type="submit" aria-label="Subscribe to notifications">Subscribe</button>
+            <p id="notification-status"></p>
+        </form>
+    </section>
 
-<section id="resources" class="resources-section">
-    <h2 class="section-title">Resources</h2>
-    <p class="section-subtitle">Explore vaccine guidelines, safety information, and public health resources provided by the Government of Nepal.</p>
-    <div class="carousel-container">
-        <button class="carousel-button prev" onclick="scrollCarousel(-1)">&#10094;</button>
-        <div class="resources-carousel">
-            <div class="resource-card">
+    <section id="faqs" class="faq-section" data-aos="fade-up">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Find quick answers to your vaccine-related questions.</p>
+        <input type="text" id="faq-search" placeholder="Search FAQs..." class="faq-search" aria-label="Search FAQs">
+        <div class="faq-container">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <button class="faq-question" aria-expanded="false">What vaccines are recommended during pregnancy?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>The recommended vaccines during pregnancy include Tdap, Flu, and COVID-19. They help protect both the mother and baby from infections.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <button class="faq-question" aria-expanded="false">Why is the Tdap vaccine important for pregnant women?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>The Tdap vaccine protects against pertussis (whooping cough), which can be severe for newborns. Immunization during pregnancy ensures the baby receives antibodies for protection after birth.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <button class="faq-question" aria-expanded="false">When is the best time to get the flu vaccine during pregnancy?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>The flu vaccine can be administered at any time during pregnancy, ideally before the start of flu season to maximize protection for both the mother and baby.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <button class="faq-question" aria-expanded="false">Is the COVID-19 vaccine safe during pregnancy?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>Yes, the COVID-19 vaccine is considered safe during pregnancy and is recommended to reduce the risk of severe illness. Consult your healthcare provider for specific guidance.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                <button class="faq-question" aria-expanded="false">Are there any vaccines that should be avoided during pregnancy?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>Yes, live vaccines like MMR (measles, mumps, rubella) and varicella should generally be avoided during pregnancy. Consult with your healthcare provider before getting vaccinated.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
+                <button class="faq-question" aria-expanded="false">How do vaccines protect the baby during pregnancy?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>Vaccines help produce antibodies in the mother, which are passed to the baby, providing immunity until the baby is old enough to receive vaccinations directly.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+                <button class="faq-question" aria-expanded="false">Can I get vaccinated while breastfeeding?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>Most vaccines, including flu and COVID-19, are safe for breastfeeding mothers. Vaccination can continue to protect both mother and baby from infections.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="800">
+                <button class="faq-question" aria-expanded="false">What should I do if I miss a recommended vaccine during pregnancy?<span class="plus-minus"><i class="fas fa-plus"></i></span></button>
+                <div class="faq-answer"><p>If you miss a recommended vaccine, consult your healthcare provider to discuss options. Some vaccines can still be administered postpartum to protect both mother and baby.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="resources-section" data-aos="fade-up">
+        <h2 class="section-title">Resources</h2>
+        <p class="section-subtitle">Explore trusted resources from the Government of Nepal and health organizations.</p>
+        <div class="resource-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="guidelines">Guidelines</button>
+            <button class="filter-btn" data-filter="health">Health Updates</button>
+            <button class="filter-btn" data-filter="safety">Safety Info</button>
+        </div>
+        <div class="resource-grid">
+            <div class="resource-card" data-category="guidelines" data-aos="fade-up" data-aos-delay="100">
                 <h3 class="resource-title">Vaccination Guidelines</h3>
                 <p class="resource-description">Protocols and schedules for vaccines for pregnant women and newborns.</p>
-                <a href="https://example.com/guidelines" class="resource-link" target="_blank">View Guidelines</a>
+                <a href="#" class="resource-link">View Guidelines</a>
             </div>
-            <div class="resource-card">
+            <div class="resource-card" data-category="health" data-aos="fade-up" data-aos-delay="200">
                 <h3 class="resource-title">Health Bulletins</h3>
                 <p class="resource-description">Monthly updates on public health from the Ministry of Health.</p>
-                <a href="https://example.com/bulletins" class="resource-link" target="_blank">View Bulletins</a>
+                <a href="#" class="resource-link">View Bulletins</a>
             </div>
-            <div class="resource-card">
+            <div class="resource-card" data-category="safety" data-aos="fade-up" data-aos-delay="300">
                 <h3 class="resource-title">Vaccine Safety Info</h3>
                 <p class="resource-description">Insight into vaccine safety and effectiveness during pregnancy.</p>
-                <a href="https://example.com/safety" class="resource-link" target="_blank">Learn More</a>
+                <a href="#" class="resource-link">Learn More</a>
             </div>
-            <div class="resource-card">
+            <div class="resource-card" data-category="guidelines" data-aos="fade-up" data-aos-delay="400">
                 <h3 class="resource-title">Maternal Immunization Benefits</h3>
                 <p class="resource-description">Benefits of maternal immunization for mother and baby health.</p>
-                <a href="https://example.com/immunization-benefits" class="resource-link" target="_blank">Explore More</a>
+                <a href="#" class="resource-link">Explore More</a>
             </div>
-            <div class="resource-card">
+            <div class="resource-card" data-category="guidelines" data-aos="fade-up" data-aos-delay="500">
                 <h3 class="resource-title">Postnatal Vaccination Info</h3>
                 <p class="resource-description">Guidelines on essential vaccinations for newborns after birth.</p>
-                <a href="https://example.com/postnatal-vaccines" class="resource-link" target="_blank">Read More</a>
+                <a href="#" class="resource-link">Read More</a>
             </div>
-            <div class="resource-card">
+            <div class="resource-card" data-category="guidelines" data-aos="fade-up" data-aos-delay="600">
                 <h3 class="resource-title">Travel Vaccine Requirements</h3>
                 <p class="resource-description">Vaccine recommendations for pregnant travelers in Nepal.</p>
-                <a href="https://example.com/travel-vaccines" class="resource-link" target="_blank">Get Details</a>
+                <a href="#" class="resource-link">Get Details</a>
             </div>
-            <div class="resource-card">
+            <div class="resource-card" data-category="safety" data-aos="fade-up" data-aos-delay="700">
                 <h3 class="resource-title">Vaccine-Preventable Diseases</h3>
                 <p class="resource-description">Details on diseases preventable through vaccination for families.</p>
-                <a href="https://example.com/preventable-diseases" class="resource-link" target="_blank">Learn More</a>
+                <a href="#" class="resource-link">Learn More</a>
             </div>
         </div>
-        <button class="carousel-button next" onclick="scrollCarousel(1)">&#10095;</button>
-    </div>
-</section>
+    </section>
 
-    <!-- Footer -->
+    <section id="testimonials" class="testimonials-section" data-aos="fade-up">
+        <h2 class="section-title">What Families Say</h2>
+        <p class="section-subtitle">Hear from parents who trust Mero Khop for their vaccine needs.</p>
+        <div class="swiper testimonials-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <p>"Mero Khop made it so easy to keep track of my baby's vaccines. The reminders are a lifesaver!"</p>
+                        <span>- Sunita, Kathmandu</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <p>"The clear information and user-friendly scheduler gave me confidence during my pregnancy."</p>
+                        <span>- Priya, Pokhara</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <p>"I love how Mero Khop provides trusted resources in Nepali. It feels tailored for us."</p>
+                        <span>- Anju, Biratnagar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section about">
-                <h3>Vaccine Info</h3>
-                <p>Your trusted resource for vaccination guidelines and information, supporting safe pregnancies and healthy families in Nepal.</p>
+            <div class="footer-section">
+                <h3>About Mero Khop</h3>
+                <p>Your trusted resource for vaccination guidance, supporting safe pregnancies and healthy families in Nepal.</p>
             </div>
-            
-            <div class="footer-section links">
+            <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#pregnancy-vaccines">Pregnancy Vaccines</a></li>
-                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#scheduler">Child Scheduler</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
                     <li><a href="#resources">Resources</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-    
-            <div class="footer-section social">
+            <div class="footer-section">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 मेरो खोप . All rights reserved.</p>
-            <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
+            <p>© 2024 मेरो खोप. All rights reserved.</p>
+            <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">Back to Top</button>
         </div>
     </footer>
-    
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
