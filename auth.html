@@ -55,45 +55,69 @@
                 <button class="toggle-btn active" data-form="login" aria-pressed="true">Login</button>
                 <button class="toggle-btn" data-form="register" aria-pressed="false">Register</button>
             </div>
-            <form id="login-form" class="auth-form" style="display: flex;" aria-label="Login form">
-                <h2>Login to Mero Khop</h2>
+            <form id="login-form" class="auth-form login-form" style="display: flex;" aria-label="Login form">
+                <h2 class="auth-title">Welcome Back</h2>
                 <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" name="email" required aria-describedby="login-email-error">
-                    <span id="login-email-error" class="form-error" role="alert"></span>
+                    <label for="login-email">Email Address</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="login-email" name="email" required aria-describedby="login-email-error">
+                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                        <span id="login-email-error" class="form-error" role="alert"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" required aria-describedby="login-password-error">
-                    <span id="login-password-error" class="form-error" role="alert"></span>
+                    <div class="input-wrapper">
+                        <input type="password" id="login-password" name="password" required aria-describedby="login-password-error">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <span id="login-password-error" class="form-error" role="alert"></span>
+                    </div>
                 </div>
-                <button type="submit" class="auth-btn" disabled>Login</button>
+                <a href="#" class="forgot-password" aria-label="Forgot password">Forgot Password?</a>
+                <button type="submit" class="auth-btn login-btn-style" disabled>Login</button>
                 <div class="loading-spinner" style="display: none;"></div>
                 <p id="login-success" class="status-message" role="status"></p>
             </form>
-            <form id="register-form" class="auth-form" style="display: none;" aria-label="Register form">
-                <h2>Create an Account</h2>
+            <form id="register-form" class="auth-form register-form" style="display: none;" aria-label="Register form">
+                <h2 class="auth-title">Create Your Account</h2>
                 <div class="form-group">
                     <label for="register-name">Full Name</label>
-                    <input type="text" id="register-name" name="name" required aria-describedby="register-name-error">
-                    <span id="register-name-error" class="form-error" role="alert"></span>
+                    <div class="input-wrapper">
+                        <input type="text" id="register-name" name="name" required aria-describedby="register-name-error">
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                        <span id="register-name-error" class="form-error" role="alert"></span>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="email" id="register-email" name="email" required aria-describedby="register-email-error">
-                    <span id="register-email-error" class="form-error" role="alert"></span>
+                    <label for="register-email">Email Address</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="register-email" name="email" required aria-describedby="register-email-error">
+                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                        <span id="register-email-error" class="form-error" role="alert"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="register-password">Password</label>
-                    <input type="password" id="register-password" name="password" required aria-describedby="register-password-error">
-                    <span id="register-password-error" class="form-error" role="alert"></span>
+                    <div class="input-wrapper">
+                        <input type="password" id="register-password" name="password" required aria-describedby="register-password-error">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <span id="register-password-error" class="form-error" role="alert"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="register-confirm-password">Confirm Password</label>
-                    <input type="password" id="register-confirm-password" name="confirm-password" required aria-describedby="register-confirm-password-error">
-                    <span id="register-confirm-password-error" class="form-error" role="alert"></span>
+                    <div class="input-wrapper">
+                        <input type="password" id="register-confirm-password" name="confirm-password" required aria-describedby="register-confirm-password-error">
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                        <span id="register-confirm-password-error" class="form-error" role="alert"></span>
+                    </div>
                 </div>
-                <button type="submit" class="auth-btn" disabled>Register</button>
+                <div class="form-group terms-group">
+                    <input type="checkbox" id="terms" name="terms" required aria-describedby="terms-error">
+                    <label for="terms" class="terms-label">I agree to the <a href="#terms" class="terms-link">Terms & Conditions</a></label>
+                    <span id="terms-error" class="form-error" role="alert"></span>
+                </div>
+                <button type="submit" class="auth-btn register-btn-style" disabled>Register</button>
                 <div class="loading-spinner" style="display: none;"></div>
                 <p id="register-success" class="status-message" role="status"></p>
             </form>

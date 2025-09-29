@@ -692,6 +692,10 @@ body {
     animation: fadeInTable 0.5s ease-out;
 }
 
+:where(:root[data-theme="dark"]) .schedule-table {
+    background: #2a2a2a;
+}
+
 .schedule-table th, .schedule-table td {
     padding: var(--spacing-unit);
     text-align: left;
@@ -719,12 +723,24 @@ body {
     background: #f8d7da;
 }
 
+:where(:root[data-theme="dark"]) .schedule-table .past {
+    background: #4a1e1e;
+}
+
 .schedule-table .due {
     background: #fff3cd;
 }
 
+:where(:root[data-theme="dark"]) .schedule-table .due {
+    background: #4a3a1e;
+}
+
 .schedule-table .upcoming {
     background: #d4edda;
+}
+
+:where(:root[data-theme="dark"]) .schedule-table .upcoming {
+    background: #1e4a2a;
 }
 
 .notification-title {
@@ -732,13 +748,6 @@ body {
     font-size: clamp(1.3rem, 2vw, 1.5rem);
     color: var(--primary-color);
     margin-bottom: calc(var(--spacing-unit) * 1.5);
-}
-
-.status-message {
-    margin-top: var(--spacing-unit);
-    font-weight: 500;
-    color: var(--secondary-color);
-    animation: fadeIn 0.5s ease-out;
 }
 
 /* FAQ Section */
@@ -757,7 +766,7 @@ body {
     margin: 0 auto calc(var(--spacing-unit) * 2);
     padding: 0.8rem;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     font-size: 1rem;
 }
 
@@ -795,7 +804,7 @@ body {
     transition: background 0.3s;
 }
 
-.faq-question:hover {
+.faq-question:hover, .faq-question:focus {
     background: #0056b3;
 }
 
@@ -1077,60 +1086,37 @@ body {
         padding-left: 1.5rem;
         background: none;
     }
-    .dropdown-menu.active {
-        display: block;
-    }
-    .login-btn {
-        width: 100%;
-        text-align: center;
-        margin-top: 0.5rem;
-    }
-    .hero-title .nepal-font {
-        font-size: 2.5rem;
-    }
-    .hero-title .english-font {
-        font-size: 1.5rem;
-    }
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
     .hero-cta {
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-unit);
     }
     .vaccine-card img {
         height: 150px;
     }
     .scheduler-form, .notification-form {
-        padding: 1.5rem;
+        padding: calc(var(--spacing-unit) * 1.5);
     }
     .schedule-table {
         font-size: 0.9rem;
     }
     .auth-container {
-        padding: 1.5rem;
+        padding: calc(var(--spacing-unit) * 1.5);
     }
     .auth-form h2 {
-        font-size: 1.5rem;
+        font-size: clamp(1.3rem, 2vw, 1.5rem);
     }
     .footer-bottom {
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-unit);
     }
 }
 
 @media (max-width: 480px) {
     .navbar-logo {
-        font-size: 1.5rem;
-    }
-    .hero-title .nepal-font {
-        font-size: 2rem;
-    }
-    .hero-title .english-font {
-        font-size: 1.2rem;
+        font-size: clamp(1.3rem, 2vw, 1.5rem);
     }
     .vaccine-card {
-        padding: 1rem;
+        padding: var(--spacing-unit);
     }
     .form-group {
         max-width: 100%;
@@ -1167,4 +1153,8 @@ body {
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
