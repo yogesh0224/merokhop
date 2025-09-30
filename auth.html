@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login or register to access personalized vaccine schedules on Mero Khop.">
-    <meta name="keywords" content="login, register, vaccines, Nepal, immunization">
+    <meta name="description" content="Login or register for personalized vaccine services on Mero Khop.">
+    <meta name="keywords" content="login, register, vaccines, Nepal">
     <meta name="author" content="Mero Khop Team">
     <meta name="robots" content="noindex">
     <title>Mero Khop - Login / Register</title>
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <!-- Theme Toggle -->
@@ -26,23 +25,13 @@
         <div class="navbar-container">
             <a href="index.html" class="navbar-logo">मेरो खोप</a>
             <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <i class="fas fa-bars"></i>
+                <span class="hamburger"></span>
             </button>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Pregnancy Vaccines</a></li>
                 <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Child Scheduler</a></li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle" aria-expanded="false">
-                        More <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html#faq" class="dropdown-link">FAQs</a></li>
-                        <li><a href="index.html#resources" class="dropdown-link">Resources</a></li>
-                        <li><a href="index.html#testimonials" class="dropdown-link">Testimonials</a></li>
-                        <li><a href="index.html#contact" class="dropdown-link">Contact Us</a></li>
-                    </ul>
-                </li>
+                <li class="nav-item"><a href="index.html#faq" class="nav-link">FAQs</a></li>
                 <li class="nav-item"><a href="auth.html" class="nav-link login-btn active">Login</a></li>
             </ul>
         </div>
@@ -52,114 +41,59 @@
     <section class="auth-section" data-aos="fade-up">
         <div class="auth-container">
             <div class="auth-toggle">
-                <button class="toggle-btn active" data-form="login" aria-pressed="true">Login</button>
-                <button class="toggle-btn" data-form="register" aria-pressed="false">Register</button>
+                <button class="toggle-btn active" data-form="login">Login</button>
+                <button class="toggle-btn" data-form="register">Register</button>
             </div>
-            <form id="login-form" class="auth-form login-form" style="display: flex;" aria-label="Login form">
-                <h2 class="auth-title">Welcome Back</h2>
+            <form id="login-form" class="auth-form" style="display: block;">
+                <h2>Login</h2>
                 <div class="form-group">
-                    <label for="login-email">Email Address</label>
-                    <div class="input-wrapper">
-                        <input type="email" id="login-email" name="email" required aria-describedby="login-email-error">
-                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
-                        <span id="login-email-error" class="form-error" role="alert"></span>
-                    </div>
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required aria-describedby="login-error">
+                    <span id="login-error" class="error-message" role="alert"></span>
                 </div>
                 <div class="form-group">
                     <label for="login-password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="login-password" name="password" required aria-describedby="login-password-error">
-                        <span class="input-icon"><i class="fas fa-lock"></i></span>
-                        <span id="login-password-error" class="form-error" role="alert"></span>
-                    </div>
+                    <input type="password" id="login-password" name="password" required aria-describedby="login-error">
                 </div>
-                <a href="#" class="forgot-password" aria-label="Forgot password">Forgot Password?</a>
-                <button type="submit" class="auth-btn login-btn-style" disabled>Login</button>
-                <div class="loading-spinner" style="display: none;"></div>
-                <p id="login-success" class="status-message" role="status"></p>
+                <button type="submit" class="auth-btn">Login</button>
+                <a href="#" class="forgot-password">Forgot Password?</a>
             </form>
-            <form id="register-form" class="auth-form register-form" style="display: none;" aria-label="Register form">
-                <h2 class="auth-title">Create Your Account</h2>
+            <form id="register-form" class="auth-form" style="display: none;">
+                <h2>Register</h2>
                 <div class="form-group">
                     <label for="register-name">Full Name</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="register-name" name="name" required aria-describedby="register-name-error">
-                        <span class="input-icon"><i class="fas fa-user"></i></span>
-                        <span id="register-name-error" class="form-error" role="alert"></span>
-                    </div>
+                    <input type="text" id="register-name" name="name" required aria-describedby="register-error">
+                    <span id="register-error" class="error-message" role="alert"></span>
                 </div>
                 <div class="form-group">
-                    <label for="register-email">Email Address</label>
-                    <div class="input-wrapper">
-                        <input type="email" id="register-email" name="email" required aria-describedby="register-email-error">
-                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
-                        <span id="register-email-error" class="form-error" role="alert"></span>
-                    </div>
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" name="email" required aria-describedby="register-error">
                 </div>
                 <div class="form-group">
                     <label for="register-password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="register-password" name="password" required aria-describedby="register-password-error">
-                        <span class="input-icon"><i class="fas fa-lock"></i></span>
-                        <span id="register-password-error" class="form-error" role="alert"></span>
-                    </div>
+                    <input type="password" id="register-password" name="password" required aria-describedby="register-error">
                 </div>
                 <div class="form-group">
                     <label for="register-confirm-password">Confirm Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="register-confirm-password" name="confirm-password" required aria-describedby="register-confirm-password-error">
-                        <span class="input-icon"><i class="fas fa-lock"></i></span>
-                        <span id="register-confirm-password-error" class="form-error" role="alert"></span>
-                    </div>
+                    <input type="password" id="register-confirm-password" name="confirm-password" required aria-describedby="register-error">
                 </div>
-                <div class="form-group terms-group">
-                    <input type="checkbox" id="terms" name="terms" required aria-describedby="terms-error">
-                    <label for="terms" class="terms-label">I agree to the <a href="#terms" class="terms-link">Terms & Conditions</a></label>
-                    <span id="terms-error" class="form-error" role="alert"></span>
-                </div>
-                <button type="submit" class="auth-btn register-btn-style" disabled>Register</button>
-                <div class="loading-spinner" style="display: none;"></div>
-                <p id="register-success" class="status-message" role="status"></p>
+                <button type="submit" class="auth-btn">Register</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="footer" role="contentinfo">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About Mero Khop</h3>
-                <p>Your trusted resource for vaccination guidance, supporting safe pregnancies and healthy families in Nepal.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#vaccines">Pregnancy Vaccines</a></li>
-                    <li><a href="index.html#scheduler">Child Scheduler</a></li>
-                    <li><a href="index.html#faq">FAQs</a></li>
-                    <li><a href="index.html#resources">Resources</a></li>
-                    <li><a href="index.html#testimonials">Testimonials</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="#" class="social-icon" aria-label="Follow on Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon" aria-label="Follow on Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon" aria-label="Follow on Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="current-year"></span> मेरो खोप. All rights reserved.</p>
-            <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">Back to Top</button>
+    <footer id="contact" class="footer">
+        <p>&copy; 2025 Mero Khop. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
     </footer>
 
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script defer src="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.js"></script>
-    <script defer src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
