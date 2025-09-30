@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login or register for personalized vaccine services on Mero Khop.">
-    <meta name="keywords" content="login, register, vaccines, Nepal">
+    <meta name="description" content="Login or Register for Mero Khop to manage vaccine reminders.">
+    <meta name="keywords" content="login, register, vaccine reminders, Nepal">
     <meta name="author" content="Mero Khop Team">
-    <meta name="robots" content="noindex">
-    <title>Mero Khop - Login / Register</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Mero Khop - Login & Register</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -29,60 +29,61 @@
             </button>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Pregnancy Vaccines</a></li>
-                <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Child Scheduler</a></li>
+                <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Vaccines</a></li>
+                <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Vaccine Scheduler</a></li>
+                <li class="nav-item"><a href="index.html#news" class="nav-link">News & Updates</a></li>
                 <li class="nav-item"><a href="index.html#faq" class="nav-link">FAQs</a></li>
-                <li class="nav-item"><a href="auth.html" class="nav-link login-btn active">Login</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Auth Section -->
+    <!-- Authentication Section -->
     <section class="auth-section" data-aos="fade-up">
         <div class="auth-container">
+            <h2 class="auth-title">Welcome to Mero Khop</h2>
             <div class="auth-toggle">
                 <button class="toggle-btn active" data-form="login">Login</button>
                 <button class="toggle-btn" data-form="register">Register</button>
             </div>
-            <form id="login-form" class="auth-form" style="display: block;">
-                <h2>Login</h2>
+            <form id="login-form" class="auth-form">
                 <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" name="email" required aria-describedby="login-error">
-                    <span id="login-error" class="error-message" role="alert"></span>
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" name="login-email" required aria-label="Email for login">
+                    <span id="login-error" class="error-message"></span>
+                    <span id="login-success" class="success-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" name="password" required aria-describedby="login-error">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="login-password" required aria-label="Password for login">
                 </div>
                 <button type="submit" class="auth-btn">Login</button>
-                <a href="#" class="forgot-password">Forgot Password?</a>
+                <p class="auth-link">Don’t have an account? <a href="#" data-form="register" class="toggle-link">Register here</a></p>
             </form>
             <form id="register-form" class="auth-form" style="display: none;">
-                <h2>Register</h2>
                 <div class="form-group">
-                    <label for="register-name">Full Name</label>
-                    <input type="text" id="register-name" name="name" required aria-describedby="register-error">
-                    <span id="register-error" class="error-message" role="alert"></span>
+                    <label for="register-name">Full Name:</label>
+                    <input type="text" id="register-name" name="register-name" required aria-label="Full name for registration">
                 </div>
                 <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="email" id="register-email" name="email" required aria-describedby="register-error">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" name="register-email" required aria-label="Email for registration">
+                    <span id="register-error" class="error-message"></span>
+                    <span id="register-success" class="success-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="register-password">Password</label>
-                    <input type="password" id="register-password" name="password" required aria-describedby="register-error">
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" name="register-password" required aria-label="Password for registration">
                 </div>
                 <div class="form-group">
-                    <label for="register-confirm-password">Confirm Password</label>
-                    <input type="password" id="register-confirm-password" name="confirm-password" required aria-describedby="register-error">
+                    <label for="register-confirm-password">Confirm Password:</label>
+                    <input type="password" id="register-confirm-password" name="register-confirm-password" required aria-label="Confirm password">
                 </div>
                 <button type="submit" class="auth-btn">Register</button>
+                <p class="auth-link">Already have an account? <a href="#" data-form="login" class="toggle-link">Login here</a></p>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact" class="footer">
         <p>&copy; 2025 Mero Khop. All rights reserved.</p>
         <div class="social-links">

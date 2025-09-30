@@ -1,44 +1,52 @@
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background: #f4f7fa;
-    color: #333;
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
+    background: #f9f9f9;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] body {
+    background: #1a1a1a;
+    color: #e0e0e0;
 }
 
 .theme-toggle {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #fff;
+    top: 1rem;
+    right: 1rem;
+    background: none;
     border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    font-size: 1.5rem;
+    color: #3498db;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
+.theme-toggle i {
+    transition: transform 0.3s;
+}
+
+[data-theme="dark"] .theme-toggle i {
+    color: #fff;
+}
+
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(90deg, #3498db, #8e44ad);
     padding: 1rem 2rem;
     z-index: 1000;
-    transition: background 0.3s;
-}
-
-.navbar.scrolled {
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-container {
@@ -50,9 +58,9 @@ body {
 }
 
 .navbar-logo {
+    color: #fff;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2c3e50;
     text-decoration: none;
 }
 
@@ -61,33 +69,65 @@ body {
     background: none;
     border: none;
     font-size: 1.5rem;
+    color: #fff;
     cursor: pointer;
 }
 
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    align-items: center;
 }
 
-.nav-item .nav-link {
+.nav-item {
+    margin-left: 2rem;
+}
+
+.nav-link {
+    color: #fff;
     text-decoration: none;
-    color: #2c3e50;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-link:hover {
-    color: #3498db;
+    color: #ffd700;
 }
 
 .login-btn {
-    background: #3498db;
-    color: #fff;
+    background: #ffd700;
+    color: #333;
     padding: 0.5rem 1rem;
     border-radius: 5px;
 }
 
+.login-btn:hover {
+    background: #e6c200;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #3498db;
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .nav-menu.active {
+        display: flex;
+    }
+    .nav-item {
+        margin: 1rem 0;
+    }
+}
+
+/* Hero Section */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -110,7 +150,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
 
@@ -118,27 +158,22 @@ body {
     position: relative;
     z-index: 3;
     text-align: center;
+    padding: 10rem 2rem 2rem;
     color: #fff;
-    padding: 2rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .hero-title {
     font-size: 2.5rem;
-    font-weight: 700;
     margin-bottom: 1rem;
 }
 
 .nepal-font {
-    display: block;
-    font-size: 1.8rem;
+    font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
 .english-font {
     display: block;
+    font-size: 1.5rem;
 }
 
 .hero-subtitle {
@@ -148,18 +183,29 @@ body {
 
 .hero-button {
     display: inline-block;
-    padding: 1rem 2rem;
-    background: #3498db;
-    color: #fff;
+    background: #ffd700;
+    color: #333;
+    padding: 0.75rem 1.5rem;
     text-decoration: none;
     border-radius: 5px;
+    font-weight: 600;
     transition: background 0.3s;
 }
 
 .hero-button:hover {
-    background: #2980b9;
+    background: #e6c200;
 }
 
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    .english-font {
+        font-size: 1.2rem;
+    }
+}
+
+/* Vaccines Slider Section */
 .vaccines-section {
     padding: 4rem 2rem;
     text-align: center;
@@ -171,32 +217,28 @@ body {
 }
 
 .section-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #7f8c8d;
     margin-bottom: 2rem;
 }
 
-.vaccine-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+.vaccine-slider {
+    width: 100%;
+    padding: 2rem 0;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.vaccine-card {
+.swiper-slide {
     background: #fff;
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    text-align: center;
+    height: auto;
 }
 
-.vaccine-card:hover {
-    transform: translateY(-5px);
-}
-
-.vaccine-card img {
+.swiper-slide img {
     width: 100%;
     height: 150px;
     object-fit: cover;
@@ -225,57 +267,24 @@ body {
     text-decoration: underline;
 }
 
-.scheduler-section {
-    padding: 4rem 2rem;
-    text-align: center;
+.swiper-button-next, .swiper-button-prev {
+    color: #3498db;
 }
 
-.scheduler-form {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-input[type="date"] {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.schedule-btn, .save-btn, .load-btn, .reset-btn {
-    padding: 0.75rem 1.5rem;
+.swiper-pagination-bullet {
     background: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 1rem;
 }
 
-.schedule-btn:hover, .save-btn:hover, .load-btn:hover, .reset-btn:hover {
-    background: #2980b9;
+@media (max-width: 640px) {
+    .swiper-slide {
+        padding: 1rem;
+    }
+    .card-title {
+        font-size: 1rem;
+    }
 }
 
-.schedule-result {
-    margin-top: 2rem;
-    text-align: left;
-}
-
-/* Existing styles remain unchanged */
+/* Scheduler Section */
 .scheduler-section {
     padding: 4rem 2rem;
     text-align: center;
@@ -283,50 +292,56 @@ input[type="date"] {
 
 .scheduler-form {
     max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 label {
-    display: block;
-    margin-bottom: 0.5rem;
     font-weight: 500;
 }
 
 input[type="date"] {
-    width: 100%;
-    padding: 0.75rem;
+    padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
 }
 
 .schedule-btn {
-    padding: 0.75rem 1.5rem;
     background: #3498db;
     color: #fff;
+    padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 1rem;
+    transition: background 0.3s;
+    font-weight: 500;
 }
 
 .schedule-btn:hover {
     background: #2980b9;
 }
 
+.schedule-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
 .schedule-result {
     margin-top: 2rem;
-    text-align: left;
     display: none;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-result table {
@@ -335,9 +350,33 @@ input[type="date"] {
     margin-top: 1rem;
 }
 
-.schedule-result th, .schedule-result td {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
+.schedule-result th,
+.schedule-result td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.schedule-result th {
+    background: #3498db;
+    color: #fff;
+}
+
+.schedule-result td {
+    color: #333;
+}
+
+.schedule-result .status-past {
+    color: #e74c3c;
+}
+
+.schedule-result .status-due {
+    color: #e67e22;
+    font-weight: 600;
+}
+
+.schedule-result .status-upcoming {
+    color: #2ecc71;
 }
 
 .schedule-controls {
@@ -347,89 +386,83 @@ input[type="date"] {
     justify-content: center;
 }
 
-.auth-section {
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+}
+
+/* News Section */
+.news-section {
     padding: 4rem 2rem;
     text-align: center;
 }
 
-.auth-container {
-    max-width: 400px;
-    margin: 0 auto;
+.news-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    display: grid;
+    gap: 2rem;
+}
+
+.news-item {
     background: #fff;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.auth-toggle {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.toggle-btn {
-    flex: 1;
-    padding: 0.5rem;
-    border: none;
-    background: #ecf0f1;
-    cursor: pointer;
-    border-radius: 5px 5px 0 0;
-}
-
-.toggle-btn.active {
-    background: #3498db;
-    color: #fff;
-}
-
-.auth-form {
     text-align: left;
+    transition: transform 0.3s;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
+.news-item:hover {
+    transform: translateY(-5px);
 }
 
-input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
+.news-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
-.auth-btn {
-    width: 100%;
-    padding: 0.75rem;
-    background: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.auth-btn:hover {
-    background: #2980b9;
-}
-
-.error-message {
-    color: #e74c3c;
+.news-date {
     font-size: 0.9rem;
-    display: block;
-    margin-top: 0.25rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
 }
 
-.forgot-password {
-    display: block;
-    text-align: right;
-    color: #3498db;
+.news-summary {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.news-link {
+    color: #2ecc71;
     text-decoration: none;
-    margin-top: 0.5rem;
+    font-weight: 600;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #2ecc71;
+    border-radius: 5px;
+    transition: all 0.3s;
 }
 
-.forgot-password:hover {
-    text-decoration: underline;
+.news-link:hover {
+    background: #2ecc71;
+    color: #fff;
+    text-decoration: none;
 }
 
+@media (min-width: 640px) {
+    .news-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .news-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* FAQ Section */
 .faq-section {
     padding: 4rem 2rem;
     text-align: center;
@@ -446,35 +479,50 @@ input {
 
 .faq-question {
     width: 100%;
+    background: #3498db;
+    color: #fff;
     padding: 1rem;
-    background: #fff;
     border: none;
-    text-align: left;
-    font-size: 1.1rem;
-    cursor: pointer;
     border-radius: 5px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.faq-question:hover {
+    background: #2980b9;
 }
 
 .faq-answer {
     display: none;
+    background: #fff;
     padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 0 0 5px 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
+/* Footer */
 .footer {
     padding: 2rem;
     text-align: center;
-    background: #2c3e50;
+    background: #333;
     color: #fff;
 }
 
 .social-links a {
     color: #fff;
     margin: 0 1rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    transition: color 0.3s;
 }
 
+.social-links a:hover {
+    color: #ffd700;
+}
+
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -488,11 +536,11 @@ input {
 
 .modal-content {
     background: #fff;
+    margin: 10% auto;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 90%;
     max-width: 500px;
-    margin: 10% auto;
     position: relative;
 }
 
@@ -501,34 +549,20 @@ input {
     top: 1rem;
     right: 1rem;
     font-size: 1.5rem;
+    color: #333;
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-    .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        flex-direction: column;
-        padding: 1rem;
-    }
-    .nav-menu.active {
-        display: flex;
-    }
-    .hero-title {
-        font-size: 1.8rem;
-    }
-    .vaccine-grid {
-        grid-template-columns: 1fr;
-    }
+[data-theme="dark"] .modal-content {
+    background: #2c2c2c;
+    color: #e0e0e0;
 }
 
+[data-theme="dark"] .close-modal {
+    color: #fff;
+}
+
+/* Notification Area */
 .notification-area {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -550,4 +584,120 @@ input {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* Authentication Section (for auth.html) */
+.auth-section {
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    background: #ecf0f1;
+    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.toggle-btn.active {
+    background: #3498db;
+    color: #fff;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.auth-btn {
+    width: 100();
+    background: #2ecc71;
+    color: #fff;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.auth-btn:hover {
+    background: #27ae60;
+}
+
+.auth-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+.success-message {
+    color: #2ecc71;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+[data-theme="dark"] .auth-container {
+    background: #2c2c2c;
+}
+
+[data-theme="dark"] .form-group input {
+    background: #3a3a3a;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+[data-theme="dark"] .error-message {
+    color: #e74c3c;
+}
+
+[data-theme="dark"] .success-message {
+    color: #2ecc71;
 }
