@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    // Initialize external libraries
+    // Initialize AOS
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 1000,
@@ -9,9 +9,10 @@
             easing: 'ease-in-out'
         });
     } else {
-        console.warn('AOS not loaded');
+        console.warn('AOS library not loaded.');
     }
 
+    // Initialize Swiper
     if (typeof Swiper !== 'undefined') {
         new Swiper('.vaccine-slider', {
             slidesPerView: 1,
@@ -26,7 +27,7 @@
             }
         });
     } else {
-        console.warn('Swiper not loaded');
+        console.warn('Swiper library not loaded.');
     }
 
     // Navbar Toggle
@@ -71,19 +72,7 @@
         });
     }
 
-    // Site Search (simple filter)
-    const siteSearch = document.getElementById('site-search');
-    if (siteSearch) {
-        siteSearch.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            document.querySelectorAll('section').forEach(section => {
-                const text = section.textContent.toLowerCase();
-                section.style.display = text.includes(query) ? 'block' : 'none';
-            });
-        });
-    }
-
-    // Modal Functionality with focus trap
+    // Modal Functionality
     document.addEventListener('click', (e) => {
         const modalTrigger = e.target.closest('[data-modal]');
         if (modalTrigger) {
@@ -94,24 +83,19 @@
                 modal.classList.add('active');
                 const focusable = modal.querySelectorAll('a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
                 const firstFocusable = focusable[0];
-                const lastFocusable = focusable[focusable.length - 1];
-                firstFocusable.focus();
+                if (firstFocusable) firstFocusable.focus();
                 modal.addEventListener('keydown', (e) => {
-                    if (e.key === 'Tab' && e.shiftKey) {
-                        if (document.activeElement === firstFocusable) {
-                            e.preventDefault();
-                            lastFocusable.focus();
-                        }
-                    } else if (e.key === 'Tab') {
-                        if (document.activeElement === lastFocusable) {
-                            e.preventDefault();
-                            firstFocusable.focus();
-                        }
+                    if (e.key === 'Tab' && e.shiftKey && document.activeElement === firstFocusable) {
+                        e.preventDefault();
+                        focusable[focusable.length - 1].focus();
+                    } else if (e.key === 'Tab' && document.activeElement === focusable[focusable.length - 1]) {
+                        e.preventDefault();
+                        firstFocusable.focus();
                     }
                 });
             }
         } else if (e.target.matches('.close-modal') || !e.target.closest('.modal-content')) {
-            e.target.closest('.modal')?.classList.remove('active');
+            document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
         }
     });
 
@@ -121,12 +105,14 @@
         }
     });
 
-    // FAQ Accordion (close others)
+    // FAQ Accordion
     document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
             const isExpanded = question.getAttribute('aria-expanded') === 'true';
-            document.querySelectorAll('.faq-question').forEach(q => q.setAttribute('aria-expanded', 'false'));
-            document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.setAttribute('aria-expanded', 'false');
+                q.nextElementSibling.style.display = 'none';
+            });
             if (!isExpanded) {
                 question.setAttribute('aria-expanded', 'true');
                 question.nextElementSibling.style.display = 'block';
@@ -135,16 +121,26 @@
     });
 
     // Scheduler Logic
-    const schedulerForm = document.getElementById('scheduler-form');
+    const schedulerForm = document.querySelector('.scheduler-form');
     if (schedulerForm) {
+        const dobInput = document.getElementById('dob');
         const scheduleResult = document.getElementById('schedule-result');
+        const calendarContainer = document.querySelector('.calendar-container');
         const saveBtn = document.getElementById('save-schedule');
         const loadBtn = document.getElementById('load-schedule');
         const resetBtn = document.getElementById('reset-schedule');
         const exportBtn = document.getElementById('export-schedule');
-        const scheduleBtn = schedulerForm.querySelector('.schedule-btn');
+        const generateBtn = document.getElementById('generate-schedule');
         const errorEl = document.getElementById('schedule-error');
         const notificationArea = document.getElementById('notification-area');
+
+        if (dobInput) {
+            flatpickr(dobInput, {
+                dateFormat: 'F j, Y',
+                maxDate: new Date('2025-10-14T09:10:00+0545'),
+                onChange: () => errorEl.textContent = ''
+            });
+        }
 
         const vaccineSchedule = [
             { vaccine: 'BCG', ageDays: 0, dose: 1 },
@@ -165,78 +161,108 @@
         let savedSchedule = null;
         let dobValue = null;
 
-        schedulerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const dobInput = document.getElementById('dob');
-            dobValue = new Date(dobInput.value);
-            const today = new Date('2025-10-14T08:24:00+0545');
-            if (!dobValue || isNaN(dobValue.getTime()) || dobValue > today) {
-                errorEl.textContent = 'Please enter a valid past date of birth.';
-                return;
-            }
-            errorEl.textContent = '';
-            scheduleBtn.disabled = true;
-            scheduleBtn.textContent = 'Generating...';
+        if (generateBtn) {
+            generateBtn.addEventListener('click', () => {
+                const dob = dobInput ? dobInput.value : '';
+                if (!dob) {
+                    if (errorEl) errorEl.textContent = 'Please select a valid date of birth.';
+                    return;
+                }
+                dobValue = new Date(dob);
+                const today = new Date('2025-10-14T09:10:00+0545');
+                if (dobValue > today) {
+                    if (errorEl) errorEl.textContent = 'Date of birth cannot be in the future.';
+                    return;
+                }
+                if (errorEl) errorEl.textContent = '';
+                if (generateBtn) {
+                    generateBtn.disabled = true;
+                    generateBtn.textContent = 'Generating...';
+                }
 
-            let tableHTML = '<table class="schedule-table"><thead><tr><th>Vaccine</th><th>Dose</th><th>Due Date</th><th>Status</th></tr></thead><tbody>';
-            const scheduleData = [];
-            vaccineSchedule.forEach(v => {
-                const dueDate = new Date(dobValue);
-                dueDate.setDate(dobValue.getDate() + v.ageDays);
-                const { label: status, class: statusClass } = getStatus(dueDate, today);
-                scheduleData.push({ vaccine: v.vaccine, dose: `Dose ${v.dose}`, dueDate: formatDate(dueDate), status, originalDate: dueDate });
-                tableHTML += `<tr><td>${v.vaccine}</td><td>Dose ${v.dose}</td><td>${formatDate(dueDate)}</td><td class="${statusClass}">${status}</td></tr>`;
+                const scheduleData = vaccineSchedule.map(v => {
+                    const dueDate = new Date(dobValue);
+                    dueDate.setDate(dobValue.getDate() + v.ageDays);
+                    const { label: status, class: statusClass } = getStatus(dueDate, today);
+                    return { vaccine: v.vaccine, dose: `Dose ${v.dose}`, dueDate: formatDate(dueDate), status, originalDate: dueDate };
+                });
+
+                if (calendarContainer) {
+                    let calendarHTML = '<div class="calendar-grid">';
+                    scheduleData.forEach(item => {
+                        calendarHTML += `<div class="calendar-event ${item.status.toLowerCase().replace(' ', '-')}" data-date="${item.originalDate.toISOString().split('T')[0]}">
+                            <span class="event-vaccine">${item.vaccine} ${item.dose}</span>
+                            <span class="event-status ${item.status.toLowerCase().replace(' ', '-')}">${item.status}</span>
+                        </div>`;
+                    });
+                    calendarHTML += '</div>';
+                    calendarContainer.innerHTML = calendarHTML;
+                }
+                if (scheduleResult) scheduleResult.style.display = 'block';
+                savedSchedule = scheduleData;
+                if (generateBtn) {
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = 'Generate Schedule';
+                }
+                if (notificationArea) updateNotifications(scheduleData, today);
             });
-            tableHTML += '</tbody></table>';
-            scheduleResult.innerHTML = `<p class="schedule-summary">Schedule for child born on ${formatDate(dobValue)}</p>${tableHTML}`;
-            scheduleResult.style.display = 'block';
-            savedSchedule = scheduleData;
-            scheduleBtn.disabled = false;
-            scheduleBtn.textContent = 'Generate Schedule';
-            updateNotifications(scheduleData, today);
-        });
+        }
 
-        saveBtn.addEventListener('click', () => {
-            if (!savedSchedule || !dobValue) return alert('No schedule to save.');
-            const dataToSave = { schedule: savedSchedule, dob: dobValue.toISOString() };
-            localStorage.setItem('vaccineSchedule', JSON.stringify(dataToSave));
-            alert('Schedule saved successfully!');
-        });
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => {
+                if (!savedSchedule || !dobValue) {
+                    alert('No schedule to save.');
+                    return;
+                }
+                const dataToSave = { schedule: savedSchedule, dob: dobValue.toISOString() };
+                localStorage.setItem('vaccineSchedule', JSON.stringify(dataToSave));
+                alert('Schedule saved successfully!');
+            });
+        }
 
-        loadBtn.addEventListener('click', () => {
-            const saved = localStorage.getItem('vaccineSchedule');
-            if (saved) {
-                const data = JSON.parse(saved);
-                savedSchedule = data.schedule;
-                dobValue = new Date(data.dob);
-                document.getElementById('dob').value = dobValue.toISOString().split('T')[0];
-                schedulerForm.dispatchEvent(new Event('submit'));
-            } else {
-                alert('No saved schedule found.');
-            }
-        });
+        if (loadBtn) {
+            loadBtn.addEventListener('click', () => {
+                const saved = localStorage.getItem('vaccineSchedule');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    savedSchedule = data.schedule;
+                    dobValue = new Date(data.dob);
+                    if (dobInput) dobInput.value = formatDate(dobValue);
+                    if (generateBtn) generateBtn.click();
+                } else {
+                    alert('No saved schedule found.');
+                }
+            });
+        }
 
-        resetBtn.addEventListener('click', () => {
-            scheduleResult.innerHTML = '';
-            scheduleResult.style.display = 'none';
-            document.getElementById('dob').value = '';
-            errorEl.textContent = '';
-            notificationArea.style.display = 'none';
-            savedSchedule = null;
-            dobValue = null;
-        });
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if (scheduleResult) scheduleResult.style.display = 'none';
+                if (calendarContainer) calendarContainer.innerHTML = '';
+                if (dobInput) dobInput.value = '';
+                if (errorEl) errorEl.textContent = '';
+                if (notificationArea) notificationArea.style.display = 'none';
+                savedSchedule = null;
+                dobValue = null;
+            });
+        }
 
-        exportBtn.addEventListener('click', () => {
-            if (!savedSchedule) return alert('No schedule to export.');
-            const icsContent = generateICS(savedSchedule, dobValue);
-            const blob = new Blob([icsContent], { type: 'text/calendar' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `vaccine_schedule_${formatDate(new Date())}.ics`;
-            a.click();
-            URL.revokeObjectURL(url);
-        });
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                if (!savedSchedule) {
+                    alert('No schedule to export.');
+                    return;
+                }
+                const icsContent = generateICS(savedSchedule, dobValue);
+                const blob = new Blob([icsContent], { type: 'text/calendar' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `vaccine_schedule_${formatDate(new Date('2025-10-14T09:10:00+0545'))}.ics`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
 
         function getStatus(dueDate, today) {
             const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
@@ -250,7 +276,7 @@
         }
 
         function updateNotifications(scheduleData, today) {
-            if (!scheduleData.length) return;
+            if (!scheduleData.length || !notificationArea) return;
             const currentMonth = today.getMonth();
             const currentYear = today.getFullYear();
             const upcoming = scheduleData.filter(item => {
@@ -282,12 +308,12 @@
                     'BEGIN:VEVENT',
                     `UID:${Date.now()}-${Math.random().toString(36).substr(2, 9)}@merokhop.com`,
                     `DTSTART:${formatICSDate(event.originalDate)}`,
-                    `DTEND:${formatICSDate(new Date(event.originalDate.getTime() + 3600000))}`, // 1 hour event
+                    `DTEND:${formatICSDate(new Date(event.originalDate.getTime() + 3600000))}`,
                     `SUMMARY:${event.vaccine} ${event.dose}`,
                     `DESCRIPTION:Vaccine due date for child born on ${formatDate(dob)}.`,
                     'CLASS:PUBLIC',
                     'BEGIN:VALARM',
-                    'TRIGGER:-P1D', // 1 day before
+                    'TRIGGER:-P1D',
                     'ACTION:DISPLAY',
                     'DESCRIPTION:Reminder: Vaccine due tomorrow!',
                     'END:VALARM',
@@ -303,102 +329,79 @@
         }
     }
 
-    // Auth Logic
-    if (document.querySelector('.auth-toggle')) {
-        document.querySelectorAll('.toggle-btn, .toggle-link').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetForm = btn.dataset.form;
-                document.querySelectorAll('.auth-form').forEach(form => form.classList.toggle('active', form.id === `${targetForm}-form`));
-                document.querySelectorAll('.toggle-btn').forEach(t => {
-                    t.classList.toggle('active', t.dataset.form === targetForm);
-                    t.setAttribute('aria-selected', t.dataset.form === targetForm ? 'true' : 'false');
-                });
+    // Auth Functionality
+    const authTabs = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    if (authTabs.length && tabPanes.length) {
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                authTabs.forEach(t => t.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
             });
         });
+    }
 
-        document.querySelectorAll('.password-toggle').forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const input = toggle.previousElementSibling;
-                const type = input.type === 'password' ? 'text' : 'password';
-                input.type = type;
-                toggle.querySelector('i').className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
-            });
-        });
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const loginError = document.getElementById('login-error');
+    const registerError = document.getElementById('register-error');
 
-        document.getElementById('login-form')?.addEventListener('submit', (e) => {
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
+            const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
-            const errorEl = document.getElementById('login-error');
-
-            if (!email || !password) {
-                errorEl.textContent = 'Please fill in all fields.';
-                return;
-            }
-
-            // Mock login with basic validation
-            if (email === 'user@example.com' && password === 'password123') {
-                errorEl.textContent = '';
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userEmail', email);
-                alert('Login successful! Redirecting...');
-                window.location.href = 'index.html';
-            } else {
-                errorEl.textContent = 'Invalid email or password.';
+            if (loginError) {
+                if (!email || !password) {
+                    loginError.textContent = 'Please fill in all fields.';
+                    return;
+                }
+                // Mock authentication
+                if (email === 'test@example.com' && password === 'password123') {
+                    loginError.textContent = 'Login successful! Redirecting...';
+                    loginError.style.color = 'var(--success-color)';
+                    setTimeout(() => window.location.href = 'index.html', 1000);
+                } else {
+                    loginError.textContent = 'Invalid email or password.';
+                }
             }
         });
+    }
 
-        document.getElementById('register-form')?.addEventListener('submit', (e) => {
+    if (registerForm) {
+        registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('register-name').value.trim();
-            const email = document.getElementById('register-email').value.trim();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
-            const confirm = document.getElementById('register-confirm').value;
-            const emailError = document.getElementById('register-error');
-            const confirmError = document.getElementById('confirm-error');
-
-            if (!name || !email || !password || !confirm) {
-                emailError.textContent = 'Please fill in all fields.';
-                return;
+            if (registerError) {
+                if (!name || !email || !password) {
+                    registerError.textContent = 'Please fill in all fields.';
+                    return;
+                }
+                if (password.length < 6) {
+                    registerError.textContent = 'Password must be at least 6 characters.';
+                    return;
+                }
+                registerError.textContent = 'Registration successful! Please log in.';
+                registerError.style.color = 'var(--success-color)';
+                setTimeout(() => {
+                    if (document.querySelector('[data-tab="login"]')) {
+                        document.querySelector('[data-tab="login"]').click();
+                    }
+                }, 1000);
             }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                emailError.textContent = 'Please enter a valid email address.';
-                return;
-            }
-
-            if (password.length < 8) {
-                confirmError.textContent = 'Password must be at least 8 characters.';
-                return;
-            }
-
-            if (password !== confirm) {
-                confirmError.textContent = 'Passwords do not match.';
-                return;
-            }
-
-            // Mock registration
-            emailError.textContent = '';
-            confirmError.textContent = '';
-            alert('Registration successful! Please login.');
-            document.querySelector('[data-form="login"]').click();
         });
     }
 
-    // Check login status and update UI
-    if (localStorage.getItem('isLoggedIn') === 'true' && document.querySelector('.btn-primary')) {
-        const loginBtn = document.querySelector('.btn-primary');
-        const userEmail = localStorage.getItem('userEmail');
-        loginBtn.textContent = `Logout (${userEmail})`;
-        loginBtn.href = '#';
-        loginBtn.addEventListener('click', (e) => {
+    // Ensure tab switching works on link clicks
+    document.querySelectorAll('.auth-link a').forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userEmail');
-            alert('Logged out successfully!');
-            window.location.reload();
+            const targetTab = link.getAttribute('data-tab') || link.textContent.toLowerCase().replace(' here', '');
+            document.querySelector(`[data-tab="${targetTab}"]`).click();
         });
-    }
+    });
 })();
