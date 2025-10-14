@@ -1,100 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login or Register for Mero Khop to manage vaccine reminders.">
-    <meta name="keywords" content="login, register, vaccine reminders, Nepal">
-    <meta name="author" content="Mero Khop Team">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Mero Khop - Login & Register</title>
+    <title>Login/Register - Mero Khop</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" aria-label="Toggle dark mode">
+<body data-theme="light">
+    <header class="header">
+        <nav class="navbar sticky">
+            <div class="navbar-container container">
+                <a href="index.html" class="navbar-logo nepal-font">मेरो खोप</a>
+                <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu" role="menubar">
+                    <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Vaccines</a></li>
+                    <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Scheduler</a></li>
+                    <li class="nav-item"><a href="index.html#news" class="nav-link">News & Updates</a></li>
+                    <li class="nav-item"><a href="index.html#faqs" class="nav-link">FAQs</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <button class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
 
-    <!-- Navbar -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="navbar-container">
-            <a href="index.html" class="navbar-logo">मेरो खोप</a>
-            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Vaccines</a></li>
-                <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Vaccine Scheduler</a></li>
-                <li class="nav-item"><a href="index.html#news" class="nav-link">News & Updates</a></li>
-                <li class="nav-item"><a href="index.html#faq" class="nav-link">FAQs</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Authentication Section -->
-    <section class="auth-section" data-aos="fade-up">
-        <div class="auth-container">
-            <h2 class="auth-title">Welcome to Mero Khop</h2>
-            <div class="auth-toggle">
-                <button class="toggle-btn active" data-form="login">Login</button>
-                <button class="toggle-btn" data-form="register">Register</button>
+    <main class="auth-section section-padding">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="auth-title">Welcome to Mero Khop</h2>
+                <div class="auth-toggle">
+                    <button class="toggle-btn active" data-form="login" aria-selected="true">Login</button>
+                    <button class="toggle-btn" data-form="register" aria-selected="false">Register</button>
+                </div>
+                <form id="login-form" class="auth-form active" novalidate>
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required aria-describedby="login-error">
+                        <div id="login-error" class="error-message" role="alert"></div>
+                    </div>
+                    <div class="form-group password-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required minlength="8">
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <button type="submit" class="auth-btn btn-primary">Login</button>
+                    <p class="auth-link">Don’t have an account? <a href="#" class="toggle-link" data-form="register">Register here</a></p>
+                </form>
+                <form id="register-form" class="auth-form" novalidate>
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required aria-describedby="register-error">
+                        <div id="register-error" class="error-message" role="alert"></div>
+                    </div>
+                    <div class="form-group password-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required minlength="8">
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <div class="form-group password-group">
+                        <label for="register-confirm">Confirm Password</label>
+                        <input type="password" id="register-confirm" required minlength="8" aria-describedby="confirm-error">
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility"><i class="fas fa-eye"></i></button>
+                        <div id="confirm-error" class="error-message" role="alert"></div>
+                    </div>
+                    <button type="submit" class="auth-btn btn-primary">Register</button>
+                    <p class="auth-link">Already have an account? <a href="#" class="toggle-link" data-form="login">Login here</a></p>
+                </form>
             </div>
-            <form id="login-form" class="auth-form">
-                <div class="form-group">
-                    <label for="login-email">Email:</label>
-                    <input type="email" id="login-email" name="login-email" required aria-label="Email for login">
-                    <span id="login-error" class="error-message"></span>
-                    <span id="login-success" class="success-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" name="login-password" required aria-label="Password for login">
-                </div>
-                <button type="submit" class="auth-btn">Login</button>
-                <p class="auth-link">Don’t have an account? <a href="#" data-form="register" class="toggle-link">Register here</a></p>
-            </form>
-            <form id="register-form" class="auth-form" style="display: none;">
-                <div class="form-group">
-                    <label for="register-name">Full Name:</label>
-                    <input type="text" id="register-name" name="register-name" required aria-label="Full name for registration">
-                </div>
-                <div class="form-group">
-                    <label for="register-email">Email:</label>
-                    <input type="email" id="register-email" name="register-email" required aria-label="Email for registration">
-                    <span id="register-error" class="error-message"></span>
-                    <span id="register-success" class="success-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="register-password">Password:</label>
-                    <input type="password" id="register-password" name="register-password" required aria-label="Password for registration">
-                </div>
-                <div class="form-group">
-                    <label for="register-confirm-password">Confirm Password:</label>
-                    <input type="password" id="register-confirm-password" name="register-confirm-password" required aria-label="Confirm password">
-                </div>
-                <button type="submit" class="auth-btn">Register</button>
-                <p class="auth-link">Already have an account? <a href="#" data-form="login" class="toggle-link">Login here</a></p>
-            </form>
         </div>
-    </section>
+    </main>
 
-    <footer id="contact" class="footer">
-        <p>&copy; 2025 Mero Khop. All rights reserved.</p>
-        <div class="social-links">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025, 08:24 AM +0545.</p>
+            <div class="social-links">
+                <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/merokhop" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/merokhop" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
