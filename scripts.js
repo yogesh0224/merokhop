@@ -2,19 +2,20 @@
     'use strict';
 
     // Initialize AOS
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 1000,
-            once: true,
-            easing: 'ease-in-out'
-        });
-    } else {
-        console.warn('AOS library not loaded.');
-    }
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-in-out'
+    });
 
-    // Initialize Swiper
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.vaccine-slider', {
+    // Initialize Swiper with error handling
+    function initSwiper() {
+        if (typeof Swiper === 'undefined') {
+            console.error('Swiper library failed to load. Please check your internet connection or CDN URL.');
+            return;
+        }
+
+        const swiper = new Swiper('.vaccine-slider', {
             slidesPerView: 1,
             spaceBetween: 20,
             loop: true,
@@ -26,9 +27,12 @@
                 1024: { slidesPerView: 3 }
             }
         });
-    } else {
-        console.warn('Swiper library not loaded.');
     }
+
+    // Defer Swiper initialization to ensure library is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        initSwiper();
+    });
 
     // Navbar Toggle
     const menuToggle = document.querySelector('.menu-toggle');
@@ -41,17 +45,17 @@
         });
     }
 
-    // Smooth Scroll for anchors
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
-            }
-            if (window.innerWidth <= 768 && navMenu) {
-                navMenu.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
+                if (window.innerWidth <= 768 && navMenu) {
+                    navMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
             }
         });
     });
@@ -81,6 +85,7 @@
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
                 const focusable = modal.querySelectorAll('a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
                 const firstFocusable = focusable[0];
                 if (firstFocusable) firstFocusable.focus();
@@ -94,14 +99,20 @@
                     }
                 });
             }
-        } else if (e.target.matches('.close-modal') || !e.target.closest('.modal-content')) {
-            document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+        } else if (e.target.classList.contains('close-modal') || !e.target.closest('.modal-content')) {
+            document.querySelectorAll('.modal.active').forEach(modal => {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            });
         }
     });
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            document.querySelectorAll('.modal.active').forEach(modal => modal.classList.remove('active'));
+            document.querySelectorAll('.modal.active').forEach(modal => {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            });
         }
     });
 
@@ -109,38 +120,30 @@
     document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
             const isExpanded = question.getAttribute('aria-expanded') === 'true';
+            const answer = question.nextElementSibling;
             document.querySelectorAll('.faq-question').forEach(q => {
                 q.setAttribute('aria-expanded', 'false');
                 q.nextElementSibling.style.display = 'none';
             });
             if (!isExpanded) {
                 question.setAttribute('aria-expanded', 'true');
-                question.nextElementSibling.style.display = 'block';
+                answer.style.display = 'block';
             }
         });
     });
 
     // Scheduler Logic
-    const schedulerForm = document.querySelector('.scheduler-form');
+    const schedulerForm = document.getElementById('scheduler-form');
     if (schedulerForm) {
         const dobInput = document.getElementById('dob');
         const scheduleResult = document.getElementById('schedule-result');
-        const calendarContainer = document.querySelector('.calendar-container');
+        const scheduleBody = document.getElementById('schedule-body');
         const saveBtn = document.getElementById('save-schedule');
         const loadBtn = document.getElementById('load-schedule');
         const resetBtn = document.getElementById('reset-schedule');
         const exportBtn = document.getElementById('export-schedule');
-        const generateBtn = document.getElementById('generate-schedule');
         const errorEl = document.getElementById('schedule-error');
         const notificationArea = document.getElementById('notification-area');
-
-        if (dobInput) {
-            flatpickr(dobInput, {
-                dateFormat: 'F j, Y',
-                maxDate: new Date('2025-10-14T09:10:00+0545'),
-                onChange: () => errorEl.textContent = ''
-            });
-        }
 
         const vaccineSchedule = [
             { vaccine: 'BCG', ageDays: 0, dose: 1 },
@@ -161,122 +164,56 @@
         let savedSchedule = null;
         let dobValue = null;
 
-        if (generateBtn) {
-            generateBtn.addEventListener('click', () => {
-                const dob = dobInput ? dobInput.value : '';
-                if (!dob) {
-                    if (errorEl) errorEl.textContent = 'Please select a valid date of birth.';
-                    return;
-                }
-                dobValue = new Date(dob);
-                const today = new Date('2025-10-14T09:10:00+0545');
-                if (dobValue > today) {
-                    if (errorEl) errorEl.textContent = 'Date of birth cannot be in the future.';
-                    return;
-                }
-                if (errorEl) errorEl.textContent = '';
-                if (generateBtn) {
-                    generateBtn.disabled = true;
-                    generateBtn.textContent = 'Generating...';
-                }
+        schedulerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const dob = dobInput.value;
+            if (!dob) {
+                errorEl.textContent = 'Please select a date of birth.';
+                return;
+            }
+            dobValue = new Date(dob);
+            const today = new Date('2025-10-14T18:55:00+0545'); // Updated to current time
+            if (dobValue > today) {
+                errorEl.textContent = 'Date of birth cannot be in the future.';
+                return;
+            }
+            errorEl.textContent = '';
+            generateSchedule(today);
+        });
 
-                const scheduleData = vaccineSchedule.map(v => {
-                    const dueDate = new Date(dobValue);
-                    dueDate.setDate(dobValue.getDate() + v.ageDays);
-                    const { label: status, class: statusClass } = getStatus(dueDate, today);
-                    return { vaccine: v.vaccine, dose: `Dose ${v.dose}`, dueDate: formatDate(dueDate), status, originalDate: dueDate };
-                });
-
-                if (calendarContainer) {
-                    let calendarHTML = '<div class="calendar-grid">';
-                    scheduleData.forEach(item => {
-                        calendarHTML += `<div class="calendar-event ${item.status.toLowerCase().replace(' ', '-')}" data-date="${item.originalDate.toISOString().split('T')[0]}">
-                            <span class="event-vaccine">${item.vaccine} ${item.dose}</span>
-                            <span class="event-status ${item.status.toLowerCase().replace(' ', '-')}">${item.status}</span>
-                        </div>`;
-                    });
-                    calendarHTML += '</div>';
-                    calendarContainer.innerHTML = calendarHTML;
-                }
-                if (scheduleResult) scheduleResult.style.display = 'block';
-                savedSchedule = scheduleData;
-                if (generateBtn) {
-                    generateBtn.disabled = false;
-                    generateBtn.textContent = 'Generate Schedule';
-                }
-                if (notificationArea) updateNotifications(scheduleData, today);
+        function generateSchedule(today) {
+            scheduleBody.innerHTML = '';
+            const scheduleData = vaccineSchedule.map(v => {
+                const dueDate = new Date(dobValue);
+                dueDate.setDate(dobValue.getDate() + v.ageDays);
+                const status = getStatus(dueDate, today);
+                return { vaccine: v.vaccine, dose: `Dose ${v.dose}`, dueDate: dueDate.toLocaleDateString('en-NP', { day: '2-digit', month: 'long', year: 'numeric' }), status, originalDate: dueDate };
             });
-        }
 
-        if (saveBtn) {
-            saveBtn.addEventListener('click', () => {
-                if (!savedSchedule || !dobValue) {
-                    alert('No schedule to save.');
-                    return;
-                }
-                const dataToSave = { schedule: savedSchedule, dob: dobValue.toISOString() };
-                localStorage.setItem('vaccineSchedule', JSON.stringify(dataToSave));
-                alert('Schedule saved successfully!');
+            scheduleData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.vaccine}</td>
+                    <td>${item.dose}</td>
+                    <td>${item.dueDate}</td>
+                    <td class="${item.status.toLowerCase().replace(' ', '-')}">${item.status}</td>
+                `;
+                scheduleBody.appendChild(row);
             });
-        }
 
-        if (loadBtn) {
-            loadBtn.addEventListener('click', () => {
-                const saved = localStorage.getItem('vaccineSchedule');
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    savedSchedule = data.schedule;
-                    dobValue = new Date(data.dob);
-                    if (dobInput) dobInput.value = formatDate(dobValue);
-                    if (generateBtn) generateBtn.click();
-                } else {
-                    alert('No saved schedule found.');
-                }
-            });
-        }
-
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                if (scheduleResult) scheduleResult.style.display = 'none';
-                if (calendarContainer) calendarContainer.innerHTML = '';
-                if (dobInput) dobInput.value = '';
-                if (errorEl) errorEl.textContent = '';
-                if (notificationArea) notificationArea.style.display = 'none';
-                savedSchedule = null;
-                dobValue = null;
-            });
-        }
-
-        if (exportBtn) {
-            exportBtn.addEventListener('click', () => {
-                if (!savedSchedule) {
-                    alert('No schedule to export.');
-                    return;
-                }
-                const icsContent = generateICS(savedSchedule, dobValue);
-                const blob = new Blob([icsContent], { type: 'text/calendar' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `vaccine_schedule_${formatDate(new Date('2025-10-14T09:10:00+0545'))}.ics`;
-                a.click();
-                URL.revokeObjectURL(url);
-            });
+            scheduleResult.style.display = 'block';
+            savedSchedule = scheduleData;
+            updateNotifications(scheduleData, today);
         }
 
         function getStatus(dueDate, today) {
             const diffDays = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
-            if (diffDays < 0) return { label: 'Past', class: 'status-past' };
-            if (diffDays === 0) return { label: 'Due Today', class: 'status-due' };
-            return { label: 'Upcoming', class: 'status-upcoming' };
-        }
-
-        function formatDate(date) {
-            return date.toLocaleDateString('en-NP', { day: '2-digit', month: 'long', year: 'numeric' });
+            if (diffDays < 0) return 'Past';
+            if (diffDays === 0) return 'Due Today';
+            return 'Upcoming';
         }
 
         function updateNotifications(scheduleData, today) {
-            if (!scheduleData.length || !notificationArea) return;
             const currentMonth = today.getMonth();
             const currentYear = today.getFullYear();
             const upcoming = scheduleData.filter(item => {
@@ -288,29 +225,66 @@
                     return (new Date(current.originalDate) - today) < (new Date(closest.originalDate) - today) ? current : closest;
                 });
                 const daysUntil = Math.ceil((new Date(nextDue.originalDate) - today) / (1000 * 60 * 60 * 24));
-                notificationArea.textContent = `Reminder: Your child’s ${nextDue.vaccine} ${nextDue.dose} is due in ${daysUntil} day${daysUntil > 1 ? 's' : ''} on ${formatDate(nextDue.originalDate)}.`;
-                notificationArea.classList.add('active');
+                notificationArea.textContent = `Reminder: ${nextDue.vaccine} ${nextDue.dose} is due in ${daysUntil} day${daysUntil > 1 ? 's' : ''} on ${nextDue.dueDate}.`;
+                notificationArea.style.display = 'block';
             } else {
-                notificationArea.classList.remove('active');
+                notificationArea.style.display = 'none';
             }
         }
 
-        function generateICS(scheduleData, dob) {
-            const cal = [
+        saveBtn.addEventListener('click', () => {
+            if (!savedSchedule || !dobValue) {
+                alert('No schedule to save.');
+                return;
+            }
+            const dataToSave = { schedule: savedSchedule, dob: dobValue.toISOString() };
+            localStorage.setItem('vaccineSchedule', JSON.stringify(dataToSave));
+            alert('Schedule saved successfully!');
+        });
+
+        loadBtn.addEventListener('click', () => {
+            const saved = localStorage.getItem('vaccineSchedule');
+            if (saved) {
+                const data = JSON.parse(saved);
+                savedSchedule = data.schedule;
+                dobValue = new Date(data.dob);
+                dobInput.value = dobValue.toISOString().split('T')[0];
+                generateSchedule(new Date('2025-10-14T18:55:00+0545')); // Updated to current time
+            } else {
+                alert('No saved schedule found.');
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            scheduleResult.style.display = 'none';
+            scheduleBody.innerHTML = '';
+            dobInput.value = '';
+            errorEl.textContent = '';
+            notificationArea.style.display = 'none';
+            savedSchedule = null;
+            dobValue = null;
+        });
+
+        exportBtn.addEventListener('click', () => {
+            if (!savedSchedule) {
+                alert('No schedule to export.');
+                return;
+            }
+            const icsContent = [
                 'BEGIN:VCALENDAR',
                 'VERSION:2.0',
                 'PRODID:-//Mero Khop//Vaccine Scheduler//EN',
                 'CALSCALE:GREGORIAN',
                 'METHOD:PUBLISH'
             ];
-            scheduleData.forEach(event => {
-                cal.push(
+            savedSchedule.forEach(event => {
+                icsContent.push(
                     'BEGIN:VEVENT',
                     `UID:${Date.now()}-${Math.random().toString(36).substr(2, 9)}@merokhop.com`,
-                    `DTSTART:${formatICSDate(event.originalDate)}`,
-                    `DTEND:${formatICSDate(new Date(event.originalDate.getTime() + 3600000))}`,
+                    `DTSTART:${event.originalDate.toISOString().replace(/[-:]/g, '').slice(0, -5)}Z`,
+                    `DTEND:${new Date(event.originalDate.getTime() + 3600000).toISOString().replace(/[-:]/g, '').slice(0, -5)}Z`,
                     `SUMMARY:${event.vaccine} ${event.dose}`,
-                    `DESCRIPTION:Vaccine due date for child born on ${formatDate(dob)}.`,
+                    `DESCRIPTION:Vaccine due date for child born on ${dobValue.toLocaleDateString('en-NP', { day: '2-digit', month: 'long', year: 'numeric' })}.`,
                     'CLASS:PUBLIC',
                     'BEGIN:VALARM',
                     'TRIGGER:-P1D',
@@ -320,13 +294,15 @@
                     'END:VEVENT'
                 );
             });
-            cal.push('END:VCALENDAR');
-            return cal.join('\n');
-        }
-
-        function formatICSDate(date) {
-            return date.toISOString().replace(/-|:|\.\d\d\d/g, '').slice(0, -1) + 'Z';
-        }
+            icsContent.push('END:VCALENDAR');
+            const blob = new Blob([icsContent.join('\n')], { type: 'text/calendar' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `vaccine_schedule_${new Date().toISOString().split('T')[0]}.ics`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
     }
 
     // Auth Functionality
@@ -345,63 +321,75 @@
 
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
+    const forgotForm = document.getElementById('forgot-password-form');
     const loginError = document.getElementById('login-error');
     const registerError = document.getElementById('register-error');
+    const forgotError = document.getElementById('forgot-error');
 
+    // Password Toggle Functionality
+    document.querySelectorAll('.password-toggle').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const input = toggle.parentElement.querySelector('input');
+            const icon = toggle.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        });
+    });
+
+    // Form Validation and Submission (Basic Example)
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            if (loginError) {
-                if (!email || !password) {
-                    loginError.textContent = 'Please fill in all fields.';
-                    return;
-                }
-                // Mock authentication
-                if (email === 'test@example.com' && password === 'password123') {
-                    loginError.textContent = 'Login successful! Redirecting...';
-                    loginError.style.color = 'var(--success-color)';
-                    setTimeout(() => window.location.href = 'index.html', 1000);
-                } else {
-                    loginError.textContent = 'Invalid email or password.';
-                }
+            const email = loginForm.querySelector('#login-email').value;
+            const password = loginForm.querySelector('#login-password').value;
+            if (!email || !password) {
+                loginError.textContent = 'Please fill in all fields.';
+                return;
             }
+            loginError.textContent = 'Logging in... (Mock response)';
+            // Add actual login logic here
         });
     }
 
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            if (registerError) {
-                if (!name || !email || !password) {
-                    registerError.textContent = 'Please fill in all fields.';
-                    return;
-                }
-                if (password.length < 6) {
-                    registerError.textContent = 'Password must be at least 6 characters.';
-                    return;
-                }
-                registerError.textContent = 'Registration successful! Please log in.';
-                registerError.style.color = 'var(--success-color)';
-                setTimeout(() => {
-                    if (document.querySelector('[data-tab="login"]')) {
-                        document.querySelector('[data-tab="login"]').click();
-                    }
-                }, 1000);
+            const name = registerForm.querySelector('#register-name').value;
+            const email = registerForm.querySelector('#register-email').value;
+            const password = registerForm.querySelector('#register-password').value;
+            const confirmPassword = registerForm.querySelector('#confirm-password').value;
+            if (!name || !email || !password || !confirmPassword) {
+                registerError.textContent = 'Please fill in all fields.';
+                return;
             }
+            if (password !== confirmPassword) {
+                registerError.textContent = 'Passwords do not match.';
+                return;
+            }
+            if (password.length < 8) {
+                registerError.textContent = 'Password must be at least 8 characters.';
+                return;
+            }
+            registerError.textContent = 'Registering... (Mock response)';
+            // Add actual registration logic here
         });
     }
 
-    // Ensure tab switching works on link clicks
-    document.querySelectorAll('.auth-link a').forEach(link => {
-        link.addEventListener('click', (e) => {
+    if (forgotForm) {
+        forgotForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const targetTab = link.getAttribute('data-tab') || link.textContent.toLowerCase().replace(' here', '');
-            document.querySelector(`[data-tab="${targetTab}"]`).click();
+            const email = forgotForm.querySelector('#forgot-email').value;
+            if (!email) {
+                forgotError.textContent = 'Please enter your email.';
+                return;
+            }
+            forgotError.textContent = 'Reset link sent... (Mock response)';
+            // Add actual password reset logic here
         });
-    });
+    }
 })();

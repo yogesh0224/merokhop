@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login or Register for Mero Khop to manage your vaccine schedules.">
+    <meta name="description" content="Secure Login or Register for Mero Khop - Professional vaccine reminder platform for Nepal.">
     <meta name="author" content="Mero Khop Team">
-    <title>मेरो खोप - Login/Register</title>
+    <title>मेरो खोप - Secure Access</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,15 +13,15 @@
 </head>
 <body data-theme="light">
     <header class="header">
-        <nav class="navbar sticky">
-            <div class="navbar-container container">
+        <nav class="navbar">
+            <div class="navbar-container">
                 <div class="navbar-brand">
                     <a href="index.html" class="navbar-logo nepal-font">मेरो खोप</a>
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
-                <ul class="nav-menu" role="menubar">
+                <ul class="nav-menu">
                     <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Vaccines</a></li>
                     <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Scheduler</a></li>
@@ -37,58 +37,157 @@
     </button>
 
     <main class="auth-main">
-        <div class="auth-container container">
-            <div class="auth-tabs">
-                <button class="tab-btn active" data-tab="login">Login</button>
-                <button class="tab-btn" data-tab="register">Register</button>
-            </div>
-            <div class="auth-content">
-                <div class="tab-pane active" id="login">
-                    <h2 class="auth-title nepal-font">लग इन गर्नुहोस्</h2>
-                    <p class="auth-subtitle english-font">Access your vaccine schedules</p>
-                    <form id="login-form" class="auth-form">
-                        <div class="form-group">
-                            <label for="login-email">Email</label>
-                            <input type="email" id="login-email" required aria-describedby="login-error">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <div class="form-group">
-                            <label for="login-password">Password</label>
-                            <input type="password" id="login-password" required aria-describedby="login-error">
-                        </div>
-                        <button type="submit" class="auth-btn btn-primary">Login</button>
-                        <div id="login-error" class="error-message" role="alert"></div>
-                        <p class="auth-link">Don't have an account? <a href="#" data-tab="register">Register here</a></p>
-                    </form>
+                        <h1 class="auth-title nepal-font">मेरो खोप</h1>
+                        <p class="auth-subtitle">Secure Access to Your Vaccine Schedules</p>
+                    </div>
+                    
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" data-tab="login">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Login</span>
+                        </button>
+                        <button class="tab-btn" data-tab="register">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Register</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="tab-pane" id="register">
-                    <h2 class="auth-title nepal-font">दर्ता गर्नुहोस्</h2>
-                    <p class="auth-subtitle english-font">Create a new account</p>
-                    <form id="register-form" class="auth-form">
-                        <div class="form-group">
-                            <label for="register-name">Full Name</label>
-                            <input type="text" id="register-name" required aria-describedby="register-error">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-email">Email</label>
-                            <input type="email" id="register-email" required aria-describedby="register-error">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-password">Password</label>
-                            <input type="password" id="register-password" required aria-describedby="register-error">
-                        </div>
-                        <button type="submit" class="auth-btn btn-primary">Register</button>
-                        <div id="register-error" class="error-message" role="alert"></div>
-                        <p class="auth-link">Already have an account? <a href="#" data-tab="login">Login here</a></p>
-                    </form>
+
+                <div class="auth-content">
+                    <!-- Login Form -->
+                    <div class="tab-pane active" id="login">
+                        <form id="login-form" class="auth-form" novalidate>
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" id="login-email" name="login-email" required aria-describedby="login-error" autocomplete="username" placeholder="Enter your email">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" id="login-password" name="login-password" required aria-describedby="login-error" autocomplete="current-password" placeholder="Enter your password">
+                                    <button type="button" class="password-toggle" aria-label="Show password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-options">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="remember-me">
+                                    <span class="checkmark"></span>
+                                    Remember Me
+                                </label>
+                                <a href="#" class="forgot-password" data-modal="forgot-password-modal">Forgot Password?</a>
+                            </div>
+                            <button type="submit" class="auth-btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Sign In
+                            </button>
+                            <div id="login-error" class="error-message" role="alert"></div>
+                        </form>
+                    </div>
+
+                    <!-- Register Form -->
+                    <div class="tab-pane" id="register" style="display: none;">
+                        <form id="register-form" class="auth-form" novalidate>
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" id="register-name" name="register-name" required aria-describedby="register-error" autocomplete="name" placeholder="Full Name">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" id="register-email" name="register-email" required aria-describedby="register-error" autocomplete="username" placeholder="Email Address">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" id="register-password" name="register-password" required aria-describedby="register-error" autocomplete="new-password" placeholder="Password (min 8 characters)">
+                                    <button type="button" class="password-toggle" aria-label="Show password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" id="confirm-password" name="confirm-password" required aria-describedby="register-error" autocomplete="new-password" placeholder="Confirm Password">
+                                    <button type="button" class="password-toggle" aria-label="Show password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-options">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="register-terms" required>
+                                    <span class="checkmark"></span>
+                                    I agree to the <a href="#" data-modal="privacy-modal">Terms & Privacy Policy</a>
+                                </label>
+                            </div>
+                            <button type="submit" class="auth-btn btn-primary">
+                                <i class="fas fa-user-plus"></i>
+                                Create Account
+                            </button>
+                            <div id="register-error" class="error-message" role="alert"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal" role="dialog" aria-labelledby="forgot-password-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <i class="fas fa-key"></i>
+                <h3 id="forgot-password-title">Forgot Password</h3>
+            </div>
+            <p class="modal-description">Enter your email address and we'll send you a link to reset your password.</p>
+            <form id="forgot-password-form" class="auth-form" novalidate>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="forgot-email" name="forgot-email" required aria-describedby="forgot-error" autocomplete="username" placeholder="Enter your email">
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn btn-secondary">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Reset Link
+                </button>
+                <div id="forgot-error" class="error-message" role="alert"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal" role="dialog" aria-labelledby="privacy-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <i class="fas fa-lock"></i>
+                <h3 id="privacy-title">Privacy Policy</h3>
+            </div>
+            <p class="modal-description">We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards, last updated October 14, 2025, 07:00 PM +0545.</p>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025, 08:24 AM +0545.</p>
-            <p class="privacy-notice">Your privacy is our priority. <a href="index.html#privacy-modal" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025, 07:00 PM +0545.</p>
+            <p class="privacy-notice">Your privacy is our priority. <a href="#" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
             <div class="social-links">
                 <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://twitter.com/merokhop" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
