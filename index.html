@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="मेरो खोप: Professional vaccine reminders and scheduling for child health in Nepal, updated October 14, 2025, 06:46 PM +0545.">
+    <meta name="description" content="मेरो खोप: Professional vaccine reminders and scheduling for child health in Nepal.">
     <meta name="author" content="Mero Khop Team">
     <meta name="keywords" content="vaccine scheduler, Nepal health, child vaccination, reminders, maternal health">
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Mero Khop - Vaccine Reminders & Scheduler">
+    <meta property="og:description" content="Personalized vaccine schedules and reminders for families in Nepal.">
+    <meta property="og:image" content="assets/logo.svg">
+    <meta property="og:url" content="https://merokhop.com">
     <title>मेरो खोप - Vaccine Reminders & Scheduler</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 </head>
 <body data-theme="light">
     <header class="header">
         <nav class="navbar">
             <div class="navbar-container">
                 <div class="navbar-brand">
+                    <svg class="navbar-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" aria-label="Mero Khop Logo: Shield with Syringe">
+                        <path d="M20 20 Q20 10 30 10 H70 Q80 10 80 20 V60 Q80 70 70 70 L50 90 L30 70 Q20 60 20 50 Z" stroke="var(--primary-color)" stroke-width="4" fill="none"/>
+                        <rect x="40" y="30" width="40" height="4" fill="var(--primary-color)"/>
+                        <line x1="40" y1="30" x2="40" y2="20" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="80" y1="32" x2="90" y2="32" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="90" y1="32" x2="85" y2="28" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="90" y1="32" x2="85" y2="36" stroke="var(--primary-color)" stroke-width="4"/>
+                    </svg>
                     <a href="#home" class="navbar-logo nepal-font">मेरो खोप</a>
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -52,15 +65,15 @@
     <main>
         <section id="home" class="hero-section" data-aos="fade-in">
             <div class="hero-background">
-                <video autoplay muted loop playsinline poster="assets/hero-placeholder.jpg">
-                    <source src="assets/hero-video.mp4" type="video/mp4">
+                <video autoplay muted loop playsinline poster="assets/hero-placeholder.webp">
+                    <source src="assets/Y OGESH(1).mp4" type="video/webm">
                 </video>
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content container">
                 <h1 class="hero-title nepal-font">खोप स्मरण, सुरक्षित जीवन।</h1>
                 <p class="hero-subtitle english-font">Vaccine Reminders for a Healthy Future</p>
-                <p class="hero-description">Get personalized vaccine schedules, timely reminders, and expert advice to safeguard your family's health in Nepal as of October 14, 2025, 06:46 PM +0545.</p>
+                <p class="hero-description">Get personalized vaccine schedules, timely reminders, and expert advice to safeguard your family's health in Nepal.</p>
                 <a href="#scheduler" class="hero-button btn-primary" data-aos="zoom-in">Set Your Reminder Now</a>
             </div>
         </section>
@@ -74,7 +87,7 @@
                 <div class="vaccine-slider swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide vaccine-card">
-                            <img src="assets/tdap.jpg" alt="Tdap Vaccine" loading="lazy" class="card-image">
+                            <img src="assets/tdap.webp" alt="Tdap Vaccine" loading="lazy" class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Tdap Vaccine</h3>
                                 <p class="card-description">Essential for pregnant women to protect newborns from whooping cough. Administered between 27-36 weeks.</p>
@@ -82,7 +95,7 @@
                             </div>
                         </div>
                         <div class="swiper-slide vaccine-card">
-                            <img src="assets/flu.jpg" alt="Flu Vaccine" loading="lazy" class="card-image">
+                            <img src="assets/flu.webp" alt="Flu Vaccine" loading="lazy" class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Flu Vaccine</h3>
                                 <p class="card-description">Recommended during pregnancy to prevent severe flu complications for mother and baby.</p>
@@ -90,7 +103,7 @@
                             </div>
                         </div>
                         <div class="swiper-slide vaccine-card">
-                            <img src="assets/covid.jpg" alt="COVID-19 Vaccine" loading="lazy" class="card-image">
+                            <img src="assets/covid.webp" alt="COVID-19 Vaccine" loading="lazy" class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">COVID-19 Vaccine</h3>
                                 <p class="card-description">Safe and effective for pregnant women; consult your doctor for the best timing.</p>
@@ -98,7 +111,7 @@
                             </div>
                         </div>
                         <div class="swiper-slide vaccine-card">
-                            <img src="assets/hepb.jpg" alt="Hepatitis B Vaccine" loading="lazy" class="card-image">
+                            <img src="assets/hepb.webp" alt="Hepatitis B Vaccine" loading="lazy" class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Hepatitis B Vaccine</h3>
                                 <p class="card-description">Given at birth to prevent liver infection; follow-up doses ensure long-term protection.</p>
@@ -106,7 +119,7 @@
                             </div>
                         </div>
                         <div class="swiper-slide vaccine-card">
-                            <img src="assets/mmr.jpg" alt="MMR Vaccine" loading="lazy" class="card-image">
+                            <img src="assets/mmr.webp" alt="MMR Vaccine" loading="lazy" class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">MMR Vaccine</h3>
                                 <p class="card-description">Protects against measles, mumps, and rubella; first dose at 9-12 months, booster at 15-18 months.</p>
@@ -117,6 +130,49 @@
                     <div class="swiper-pagination"></div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
+                </div>
+                <!-- Fallback for Swiper Failure -->
+                <div class="vaccine-grid-fallback" style="display: none;">
+                    <div class="vaccine-card">
+                        <img src="assets/tdap.webp" alt="Tdap Vaccine" loading="lazy" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Tdap Vaccine</h3>
+                            <p class="card-description">Essential for pregnant women to protect newborns from whooping cough. Administered between 27-36 weeks.</p>
+                            <a href="#" class="card-link btn-secondary" data-modal="tdap-modal">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="vaccine-card">
+                        <img src="assets/flu.webp" alt="Flu Vaccine" loading="lazy" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Flu Vaccine</h3>
+                            <p class="card-description">Recommended during pregnancy to prevent severe flu complications for mother and baby.</p>
+                            <a href="#" class="card-link btn-secondary" data-modal="flu-modal">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="vaccine-card">
+                        <img src="assets/covid.webp" alt="COVID-19 Vaccine" loading="lazy" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">COVID-19 Vaccine</h3>
+                            <p class="card-description">Safe and effective for pregnant women; consult your doctor for the best timing.</p>
+                            <a href="#" class="card-link btn-secondary" data-modal="covid-modal">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="vaccine-card">
+                        <img src="assets/hepb.webp" alt="Hepatitis B Vaccine" loading="lazy" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">Hepatitis B Vaccine</h3>
+                            <p class="card-description">Given at birth to prevent liver infection; follow-up doses ensure long-term protection.</p>
+                            <a href="#" class="card-link btn-secondary" data-modal="hepb-modal">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="vaccine-card">
+                        <img src="assets/mmr.webp" alt="MMR Vaccine" loading="lazy" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title">MMR Vaccine</h3>
+                            <p class="card-description">Protects against measles, mumps, and rubella; first dose at 9-12 months, booster at 15-18 months.</p>
+                            <a href="#" class="card-link btn-secondary" data-modal="mmr-modal">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -166,13 +222,13 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Latest News & Updates</h2>
-                    <p class="section-subtitle">Stay informed with the most recent developments in vaccination and maternal health as of October 14, 2025, 06:46 PM +0545.</p>
+                    <p class="section-subtitle">Stay informed with the most recent developments in vaccination and maternal health.</p>
                 </div>
                 <div class="news-grid">
                     <article class="news-item">
                         <div class="news-content">
                             <h3 class="news-title">New Tdap Guidelines for 2025</h3>
-                            <p class="news-date">October 14, 2025, 06:46 PM</p>
+                            <p class="news-date">October 14, 2025</p>
                             <p class="news-summary">Updated Tdap recommendations to enhance newborn protection during pregnancy, effective immediately.</p>
                             <a href="#" class="news-link btn-secondary" data-modal="news-tdap-modal">Read More</a>
                         </div>
@@ -251,7 +307,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025, 06:46 PM +0545.</p>
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025.</p>
             <p class="privacy-notice">Your privacy is our priority. We never share data without consent. <a href="#" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
             <div class="social-links">
                 <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -266,9 +322,9 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="tdap-title">Tdap Vaccine Details</h3>
-            <p>Protects against tetanus, diphtheria, and pertussis. Recommended for pregnant women between 27-36 weeks, updated October 14, 2025, 06:46 PM +0545.</p>
-            <video controls>
-                <source src="assets/tdap-video.mp4" type="video/mp4">
+            <p>Protects against tetanus, diphtheria, and pertussis. Recommended for pregnant women between 27-36 weeks.</p>
+            <video controls preload="metadata">
+                <source src="assets/tdap-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -277,81 +333,69 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="flu-title">Flu Vaccine Details</h3>
-            <p>Safeguards against influenza during pregnancy and beyond, updated October 14, 2025, 06:46 PM +0545.</p>
-            <video controls>
-                <source src="assets/flu-video.mp4" type="video/mp4">
-                <p>Video unavailable. Please contact support for more details.</p>
-            </video>
+            <p>Recommended during pregnancy to prevent severe flu complications for mother and baby.</p>
+            <p>Contact your healthcare provider for seasonal availability.</p>
         </div>
     </div>
     <div id="covid-modal" class="modal" role="dialog" aria-labelledby="covid-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="covid-title">COVID-19 Vaccine Details</h3>
-            <p>Reduces risk of severe illness; safe for expectant mothers, updated booster schedule October 14, 2025, 06:46 PM +0545.</p>
-            <video controls>
-                <source src="assets/covid-video.mp4" type="video/mp4">
-                <p>Video unavailable. Please contact support for more details.</p>
-            </video>
+            <p>Safe and effective for pregnant women; consult your doctor for the best timing.</p>
+            <p>Available at major hospitals across Nepal.</p>
         </div>
     </div>
     <div id="hepb-modal" class="modal" role="dialog" aria-labelledby="hepb-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="hepb-title">Hepatitis B Vaccine Details</h3>
-            <p>Prevents liver infection from birth onward, follow-up doses updated October 14, 2025, 06:46 PM +0545.</p>
-            <video controls>
-                <source src="assets/hepb-video.mp4" type="video/mp4">
-                <p>Video unavailable. Please contact support for more details.</p>
-            </video>
+            <p>Given at birth to prevent liver infection; follow-up doses ensure long-term protection.</p>
+            <p>Part of Nepal's National Immunization Program.</p>
         </div>
     </div>
     <div id="mmr-modal" class="modal" role="dialog" aria-labelledby="mmr-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="mmr-title">MMR Vaccine Details</h3>
-            <p>Guards against measles, mumps, and rubella in children, updated schedule October 14, 2025, 06:46 PM +0545.</p>
-            <video controls>
-                <source src="assets/mmr-video.mp4" type="video/mp4">
-                <p>Video unavailable. Please contact support for more details.</p>
-            </video>
+            <p>Protects against measles, mumps, and rubella; first dose at 9-12 months, booster at 15-18 months.</p>
+            <p>Consult your pediatrician for scheduling.</p>
         </div>
     </div>
-
-    <!-- News Modals -->
     <div id="news-tdap-modal" class="modal" role="dialog" aria-labelledby="news-tdap-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="news-tdap-title">New Tdap Guidelines for 2025</h3>
-            <p>Updated Tdap vaccination recommendations to enhance newborn protection during pregnancy, effective October 14, 2025, 06:46 PM +0545. Consult your healthcare provider for details.</p>
+            <p>Updated Tdap recommendations to enhance newborn protection during pregnancy, effective immediately.</p>
+            <p>Check with your healthcare provider for implementation details.</p>
         </div>
     </div>
     <div id="news-mmr-modal" class="modal" role="dialog" aria-labelledby="news-mmr-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="news-mmr-title">Postpartum Vaccine Campaign</h3>
-            <p>Free MMR vaccines for new mothers and infants in rural Nepal, extended to December 2025. Register at local health posts.</p>
+            <p>Free MMR vaccines for new mothers and infants in rural areas, extended to December 2025.</p>
+            <p>Contact local health posts for availability.</p>
         </div>
     </div>
     <div id="news-covid-modal" class="modal" role="dialog" aria-labelledby="news-covid-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-covid-title">COVID-19 Booster Update</h3>
-            <p>New booster doses recommended for pregnant women, available at major hospitals as of October 14, 2025, 06:46 PM +0545. Schedule your appointment today.</p>
+            <h3 id="news-covid-title">COVID-19 Booster Recommendations</h3>
+            <p>New boosters advised for pregnant women, available at major hospitals as of October 2025.</p>
+            <p>Schedule your appointment today.</p>
         </div>
     </div>
-
-    <!-- Privacy Modal -->
     <div id="privacy-modal" class="modal" role="dialog" aria-labelledby="privacy-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="privacy-title">Privacy Policy</h3>
-            <p>We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards, last updated October 14, 2025, 06:46 PM +0545.</p>
+            <p>We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards.</p>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+    <script>window.Swiper || document.write('<script src="assets/swiper-bundle.min.js"><\/script>');</script>
     <script src="scripts.js"></script>
 </body>
 </html>

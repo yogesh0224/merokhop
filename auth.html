@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Secure Login or Register for Mero Khop - Professional vaccine reminder platform for Nepal.">
     <meta name="author" content="Mero Khop Team">
+    <meta property="og:title" content="Mero Khop - Secure Access">
+    <meta property="og:description" content="Login or register to access personalized vaccine schedules.">
+    <meta property="og:image" content="assets/logo.svg">
+    <meta property="og:url" content="https://merokhop.com/auth">
     <title>मेरो खोप - Secure Access</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 </head>
 <body data-theme="light">
     <header class="header">
         <nav class="navbar">
             <div class="navbar-container">
                 <div class="navbar-brand">
+                    <svg class="navbar-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" aria-label="Mero Khop Logo: Shield with Syringe">
+                        <path d="M20 20 Q20 10 30 10 H70 Q80 10 80 20 V60 Q80 70 70 70 L50 90 L30 70 Q20 60 20 50 Z" stroke="var(--primary-color)" stroke-width="4" fill="none"/>
+                        <rect x="40" y="30" width="40" height="4" fill="var(--primary-color)"/>
+                        <line x1="40" y1="30" x2="40" y2="20" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="80" y1="32" x2="90" y2="32" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="90" y1="32" x2="85" y2="28" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="90" y1="32" x2="85" y2="36" stroke="var(--primary-color)" stroke-width="4"/>
+                    </svg>
                     <a href="index.html" class="navbar-logo nepal-font">मेरो खोप</a>
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -47,7 +59,6 @@
                         <h1 class="auth-title nepal-font">मेरो खोप</h1>
                         <p class="auth-subtitle">Secure Access to Your Vaccine Schedules</p>
                     </div>
-                    
                     <div class="auth-tabs">
                         <button class="tab-btn active" data-tab="login">
                             <i class="fas fa-sign-in-alt"></i>
@@ -180,13 +191,13 @@
                 <i class="fas fa-lock"></i>
                 <h3 id="privacy-title">Privacy Policy</h3>
             </div>
-            <p class="modal-description">We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards, last updated October 14, 2025, 07:00 PM +0545.</p>
+            <p class="modal-description">We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards.</p>
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025, 07:00 PM +0545.</p>
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 14, 2025.</p>
             <p class="privacy-notice">Your privacy is our priority. <a href="#" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
             <div class="social-links">
                 <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -197,6 +208,8 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+    <script>window.Swiper || document.write('<script src="assets/swiper-bundle.min.js"><\/script>');</script>
     <script src="scripts.js"></script>
 </body>
 </html>
