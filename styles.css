@@ -375,11 +375,21 @@ body {
     line-height: 1.6;
 }
 
+.category-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: calc(2 * var(--spacing-unit)) 0 var(--spacing-unit);
+    font-weight: 600;
+}
+
+.vaccine-category {
+    margin-bottom: calc(3 * var(--spacing-unit));
+}
+
 .vaccine-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: calc(2 * var(--spacing-unit));
-    padding: calc(2 * var(--spacing-unit)) 0;
+    padding: calc(1 * var(--spacing-unit)) 0;
 }
 
 .vaccine-card {
@@ -412,14 +422,14 @@ body {
 }
 
 .vaccine-card-header .card-title {
-    font-size: clamp(1.4rem, 2vw, 1.6rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
     font-weight: 600;
     margin: 0;
 }
 
 .vaccine-card-image img {
     width: 100%;
-    height: 180px;
+    height: 160px;
     object-fit: cover;
 }
 
@@ -432,14 +442,30 @@ body {
 }
 
 .vaccine-card-content .card-description {
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
     color: #666;
     margin-bottom: var(--spacing-unit);
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .vaccine-card-content .card-link {
     align-self: flex-end;
+    font-size: 0.9rem;
+}
+
+.btn-secondary {
+    background: linear-gradient(to right, var(--secondary-color), #1976D2);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(to right, #1976D2, var(--secondary-color));
+    transform: scale(1.03);
 }
 
 [data-theme="dark"] .vaccine-card {
@@ -450,9 +476,16 @@ body {
     color: #bdc3c7;
 }
 
+[data-theme="dark"] .category-title {
+    color: #fff;
+}
+
 @media (max-width: 640px) {
     .vaccine-card {
         height: auto;
+    }
+    .vaccine-card-image img {
+        height: 140px;
     }
 }
 
@@ -642,25 +675,26 @@ body {
 }
 
 .news-title {
-    font-size: clamp(1.4rem, 2vw, 1.6rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
     font-weight: 600;
     margin: 0;
 }
 
 .news-date {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #7f8c8d;
 }
 
 .news-summary {
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
     color: #666;
-    line-height: 1.6;
+    line-height: 1.5;
     flex-grow: 1;
 }
 
 .news-link {
     align-self: flex-end;
+    font-size: 0.9rem;
 }
 
 [data-theme="dark"] .news-card {

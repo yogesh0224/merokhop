@@ -124,8 +124,7 @@ function initScheduler() {
     const errorDiv = document.getElementById('schedule-error');
     if (!schedulerForm || !scheduleResult || !scheduleBody || !notificationArea) return;
     const vaccineSchedule = [
-        { name: 'BCG', dose: 'Birth', months: 0 },
-        { name: 'Hepatitis B', dose: 'Birth', months: 0 },
+        { name: 'BCG', dose: 'At birth', months: 0 },
         { name: 'Pentavalent (DPT-HepB-Hib)', dose: '1st', months: 1.5 },
         { name: 'OPV', dose: '1st', months: 1.5 },
         { name: 'PCV', dose: '1st', months: 1.5 },
@@ -134,11 +133,13 @@ function initScheduler() {
         { name: 'PCV', dose: '2nd', months: 2.5 },
         { name: 'Pentavalent (DPT-HepB-Hib)', dose: '3rd', months: 3.5 },
         { name: 'OPV', dose: '3rd', months: 3.5 },
-        { name: 'IPV', dose: '1st', months: 3.5 },
+        { name: 'fIPV', dose: '1st', months: 3.5 },
         { name: 'MR', dose: '1st', months: 9 },
         { name: 'PCV', dose: 'Booster', months: 9 },
-        { name: 'JE', dose: '1st (endemic areas)', months: 12 },
-        { name: 'MR', dose: '2nd', months: 15 }
+        { name: 'fIPV', dose: '2nd', months: 9 },
+        { name: 'JE', dose: '1st (endemic)', months: 12 },
+        { name: 'MR', dose: '2nd', months: 15 },
+        { name: 'TCV', dose: '1st', months: 15 }
     ];
     function showToast(message) {
         notificationArea.textContent = message;
