@@ -401,7 +401,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 300px; /* Ensure minimum height for alignment */
+    height: 320px; /* Set fixed height for uniformity */
 }
 
 .vaccine-card:hover {
@@ -430,12 +430,12 @@ body {
 
 .vaccine-card-image img {
     width: 100%;
-    height: 160px;
+    height: 140px; /* Reduced height for compactness */
     object-fit: cover;
 }
 
 .vaccine-card-content {
-    padding: var(--spacing-unit);
+    padding: calc(0.75 * var(--spacing-unit)); /* Reduced padding */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -445,8 +445,8 @@ body {
 .vaccine-card-content .card-description {
     font-size: clamp(0.9rem, 1.4vw, 1rem);
     color: #666;
-    margin-bottom: var(--spacing-unit);
-    line-height: 1.5;
+    margin-bottom: calc(0.75 * var(--spacing-unit)); /* Reduced margin */
+    line-height: 1.4; /* Slightly tighter line height */
     flex-grow: 1;
 }
 
@@ -487,7 +487,7 @@ body {
         height: auto;
     }
     .vaccine-card-image img {
-        height: 140px;
+        height: 120px;
     }
 }
 
