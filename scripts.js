@@ -7,34 +7,6 @@ function initAOS() {
     });
 }
 
-// Swiper Initialization with Fallback
-function initSwiper() {
-    const swiperContainer = document.querySelector('.vaccine-slider');
-    const fallbackContainer = document.querySelector('.vaccine-grid-fallback');
-    
-    if (!swiperContainer || !fallbackContainer) return;
-
-    if (typeof Swiper === 'undefined') {
-        console.warn('Swiper library failed to load. Using static grid fallback.');
-        swiperContainer.style.display = 'none';
-        fallbackContainer.style.display = 'grid';
-        return;
-    }
-
-    new Swiper('.vaccine-slider', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: { delay: 3000, disableOnInteraction: false },
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        breakpoints: {
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
-        }
-    });
-}
-
 // Navbar Toggle
 function initNavbar() {
     const menuToggle = document.querySelector('.menu-toggle');
@@ -116,7 +88,6 @@ function initModals() {
             });
         }
     });
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             document.querySelectorAll('.modal.active').forEach(modal => {
@@ -151,22 +122,24 @@ function initScheduler() {
     const resetButton = document.getElementById('reset-schedule');
     const exportButton = document.getElementById('export-schedule');
     const errorDiv = document.getElementById('schedule-error');
-
     if (!schedulerForm || !scheduleResult || !scheduleBody || !notificationArea) return;
-
     const vaccineSchedule = [
-        { name: 'Hepatitis B', dose: 'Birth', months: 0 },
         { name: 'BCG', dose: 'Birth', months: 0 },
+        { name: 'Hepatitis B', dose: 'Birth', months: 0 },
+        { name: 'Pentavalent (DPT-HepB-Hib)', dose: '1st', months: 1.5 },
         { name: 'OPV', dose: '1st', months: 1.5 },
-        { name: 'DTP-HepB-Hib', dose: '1st', months: 1.5 },
+        { name: 'PCV', dose: '1st', months: 1.5 },
+        { name: 'Pentavalent (DPT-HepB-Hib)', dose: '2nd', months: 2.5 },
         { name: 'OPV', dose: '2nd', months: 2.5 },
-        { name: 'DTP-HepB-Hib', dose: '2nd', months: 2.5 },
+        { name: 'PCV', dose: '2nd', months: 2.5 },
+        { name: 'Pentavalent (DPT-HepB-Hib)', dose: '3rd', months: 3.5 },
         { name: 'OPV', dose: '3rd', months: 3.5 },
-        { name: 'DTP-HepB-Hib', dose: '3rd', months: 3.5 },
-        { name: 'MMR', dose: '1st', months: 9 },
-        { name: 'MMR', dose: '2nd', months: 15 }
+        { name: 'IPV', dose: '1st', months: 3.5 },
+        { name: 'MR', dose: '1st', months: 9 },
+        { name: 'PCV', dose: 'Booster', months: 9 },
+        { name: 'JE', dose: '1st (endemic areas)', months: 12 },
+        { name: 'MR', dose: '2nd', months: 15 }
     ];
-
     function showToast(message) {
         notificationArea.textContent = message;
         notificationArea.style.display = 'block';
@@ -175,26 +148,23 @@ function initScheduler() {
             notificationArea.textContent = '';
         }, 3000);
     }
-
     function calculateDueDate(dob, months) {
         const due = new Date(dob);
         due.setMonth(dob.getMonth() + months);
         return due.toISOString().split('T')[0];
     }
-
     function getStatus(dueDate) {
-        const today = new Date('2025-10-14');
+        const today = new Date('2025-10-22');
         const due = new Date(dueDate);
         if (due < today) return 'past';
         if (due.toDateString() === today.toDateString()) return 'due-today';
         return 'upcoming';
     }
-
     schedulerForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const dobInput = document.getElementById('dob');
         const dob = new Date(dobInput.value);
-        if (!dobInput.value || isNaN(dob.getTime()) || dob > new Date('2025-10-14')) {
+        if (!dobInput.value || isNaN(dob.getTime()) || dob > new Date('2025-10-22')) {
             errorDiv.textContent = 'Please enter a valid date of birth (not in the future).';
             return;
         }
@@ -216,7 +186,6 @@ function initScheduler() {
         scheduleResult.style.display = 'block';
         showToast('Schedule generated successfully!');
     });
-
     if (saveButton) {
         saveButton.addEventListener('click', () => {
             const tableData = Array.from(scheduleBody.children).map(row => ({
@@ -229,7 +198,6 @@ function initScheduler() {
             showToast('Schedule saved successfully!');
         });
     }
-
     if (loadButton) {
         loadButton.addEventListener('click', () => {
             const savedData = localStorage.getItem('vaccineSchedule');
@@ -254,7 +222,6 @@ function initScheduler() {
             }
         });
     }
-
     if (resetButton) {
         resetButton.addEventListener('click', () => {
             schedulerForm.reset();
@@ -263,7 +230,6 @@ function initScheduler() {
             showToast('Schedule reset successfully!');
         });
     }
-
     if (exportButton) {
         exportButton.addEventListener('click', () => {
             const tableData = Array.from(scheduleBody.children).map(row => ({
@@ -302,7 +268,6 @@ function initAuth() {
     const registerForm = document.getElementById('register-form');
     const forgotForm = document.getElementById('forgot-password-form');
     const tabs = document.querySelectorAll('.tab-btn');
-
     function showToast(message) {
         const toast = document.createElement('div');
         toast.classList.add('toast');
@@ -310,7 +275,6 @@ function initAuth() {
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
     }
-
     if (tabs) {
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -321,7 +285,6 @@ function initAuth() {
             });
         });
     }
-
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -341,7 +304,6 @@ function initAuth() {
             loginForm.reset();
         });
     }
-
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -372,7 +334,6 @@ function initAuth() {
             registerForm.reset();
         });
     }
-
     if (forgotForm) {
         forgotForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -395,7 +356,6 @@ function initAuth() {
             });
         });
     }
-
     document.querySelectorAll('.password-toggle').forEach(toggle => {
         toggle.addEventListener('click', () => {
             const input = toggle.previousElementSibling;
@@ -409,7 +369,6 @@ function initAuth() {
 // Initialize All Features
 document.addEventListener('DOMContentLoaded', () => {
     initAOS();
-    initSwiper();
     initNavbar();
     initSmoothScroll();
     initTheme();
