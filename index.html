@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 </head>
 <body data-theme="light">
@@ -97,180 +98,220 @@
                 </div>
                 <div class="vaccine-category">
                     <h3 id="child-vaccines" class="category-title" data-aos="fade-up" data-aos-delay="150">Childhood Vaccines</h3>
-                    <div class="vaccine-grid">
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="200">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">BCG</h4>
+                    <div class="slider-container">
+                        <div class="swiper vaccine-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">BCG</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/bcg.webp" alt="BCG Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Administered at birth to protect against tuberculosis.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="bcg-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Pentavalent (DPT-HepB-Hib)</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/pentavalent.webp" alt="Pentavalent Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 6, 10, 14 weeks. Protects against diphtheria, pertussis, tetanus, hepatitis B, Haemophilus influenzae type b.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="pentavalent-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">OPV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/opv.webp" alt="OPV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Oral doses at 6, 10, 14 weeks to prevent polio.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="opv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">PCV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/pcv.webp" alt="PCV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 6, 10 weeks, booster at 9 months. Protects against pneumococcal diseases.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="pcv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">fIPV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/fipv.webp" alt="fIPV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 14 weeks and 9 months to prevent polio.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="fipv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">MR</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/mr.webp" alt="MR Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 9 and 15 months to protect against measles and rubella.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="mr-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">JE</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/je.webp" alt="JE Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Dose at 12 months in endemic areas to protect against Japanese encephalitis.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="je-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">TCV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/tcv.webp" alt="TCV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Dose at 15 months to protect against typhoid fever.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="tcv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">HPV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/hpv.webp" alt="HPV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Single dose for girls aged 9-14 years to prevent cervical cancer.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="hpv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/bcg.webp" alt="BCG Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Administered at birth to protect against tuberculosis.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="bcg-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="250">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">Pentavalent (DPT-HepB-Hib)</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/pentavalent.webp" alt="Pentavalent Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Doses at 6, 10, 14 weeks. Protects against diphtheria, pertussis, tetanus, hepatitis B, Haemophilus influenzae type b.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="pentavalent-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="300">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">OPV</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/opv.webp" alt="OPV Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Oral doses at 6, 10, 14 weeks to prevent polio.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="opv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="350">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">PCV</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/pcv.webp" alt="PCV Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Doses at 6, 10 weeks, booster at 9 months. Protects against pneumococcal diseases.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="pcv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="400">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">fIPV</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/fipv.webp" alt="fIPV Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Doses at 14 weeks and 9 months to prevent polio.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="fipv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="450">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">MR</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/mr.webp" alt="MR Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Doses at 9 and 15 months to protect against measles and rubella.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="mr-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="500">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">JE</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/je.webp" alt="JE Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Dose at 12 months in endemic areas to protect against Japanese encephalitis.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="je-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="550">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">TCV</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/tcv.webp" alt="TCV Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Dose at 15 months to protect against typhoid fever.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="tcv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">HPV</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/hpv.webp" alt="HPV Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Single dose for girls aged 9-14 years to prevent cervical cancer.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="hpv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
                     </div>
                 </div>
                 <div class="vaccine-category">
                     <h3 id="maternal-vaccines" class="category-title" data-aos="fade-up" data-aos-delay="650">Maternal and Additional Vaccines</h3>
-                    <div class="vaccine-grid">
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="700">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">Td</h4>
+                    <div class="slider-container">
+                        <div class="swiper vaccine-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Td</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/td.webp" alt="Td Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">For pregnant women: 2 doses in first pregnancy, 1 dose in subsequent to protect against tetanus and diphtheria.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="td-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Tdap</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/tdap.webp" alt="Tdap Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Recommended for pregnant women between 27-36 weeks to protect newborns from whooping cough.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="tdap-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Flu</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/flu.webp" alt="Flu Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Recommended during pregnancy to prevent severe flu complications for mothers and babies.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="flu-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">COVID-19</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="assets/covid.webp" alt="COVID-19 Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Safe for pregnant women, reduces severe illness; consult your doctor for timing.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="covid-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/td.webp" alt="Td Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">For pregnant women: 2 doses in first pregnancy, 1 dose in subsequent to protect against tetanus and diphtheria.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="td-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="750">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">Tdap</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/tdap.webp" alt="Tdap Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Recommended for pregnant women between 27-36 weeks to protect newborns from whooping cough.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="tdap-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="800">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">Flu</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/flu.webp" alt="Flu Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Recommended during pregnancy to prevent severe flu complications for mothers and babies.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="flu-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="vaccine-card" data-aos="fade-up" data-aos-delay="850">
-                            <div class="vaccine-card-header">
-                                <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
-                                <h4 class="card-title">COVID-19</h4>
-                            </div>
-                            <div class="vaccine-card-image">
-                                <img src="assets/covid.webp" alt="COVID-19 Vaccine" loading="lazy">
-                            </div>
-                            <div class="vaccine-card-content">
-                                <p class="card-description">Safe for pregnant women; reduces severe illness. Consult doctor for timing.</p>
-                                <a href="#" class="card-link btn-secondary" data-modal="covid-modal">Learn More <i class="fas fa-arrow-right"></i></a>
-                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
                     </div>
                 </div>
@@ -281,7 +322,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Personalized Vaccine Scheduler</h2>
-                    <p class="section-subtitle">Enter your child's details for a customized vaccination plan with timely alerts and progress tracking, aligned with Nepal's 2025 schedule.</p>
+                    <p class="section-subtitle">Enter your child's details for a customized vaccination plan with timely alerts and progress tracking.</p>
                 </div>
                 <div class="scheduler-wrapper">
                     <form id="scheduler-form" class="scheduler-form">
@@ -322,75 +363,55 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Latest News & Updates</h2>
-                    <p class="section-subtitle">Stay informed with the latest developments in vaccination and maternal health in Nepal.</p>
+                    <p class="section-subtitle">Stay informed with the latest developments in vaccination and maternal health.</p>
                 </div>
-                <div class="news-grid">
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="news-card-image">
-                            <img src="assets/news-rubella.webp" alt="Nepal's Journey to Rubella Elimination" loading="lazy">
+                <div class="slider-container">
+                    <div class="swiper news-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <article class="news-card">
+                                    <div class="news-card-image">
+                                        <img src="assets/news-tdap.webp" alt="New Tdap Guidelines" loading="lazy">
+                                    </div>
+                                    <div class="news-card-content">
+                                        <h3 class="news-title">New Tdap Guidelines for 2025</h3>
+                                        <p class="news-date">October 14, 2025</p>
+                                        <p class="news-summary">Updated Tdap recommendations to enhance newborn protection during pregnancy, effective immediately.</p>
+                                        <a href="#" class="news-link btn-secondary" data-modal="news-tdap-modal">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="swiper-slide">
+                                <article class="news-card">
+                                    <div class="news-card-image">
+                                        <img src="assets/news-mmr.webp" alt="Postpartum Vaccine Campaign" loading="lazy">
+                                    </div>
+                                    <div class="news-card-content">
+                                        <h3 class="news-title">Postpartum Vaccine Campaign in Nepal</h3>
+                                        <p class="news-date">October 10, 2025</p>
+                                        <p class="news-summary">Free MMR vaccines for new mothers and infants in rural areas, extended to December 2025.</p>
+                                        <a href="#" class="news-link btn-secondary" data-modal="news-mmr-modal">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="swiper-slide">
+                                <article class="news-card">
+                                    <div class="news-card-image">
+                                        <img src="assets/news-covid.webp" alt="COVID-19 Booster Recommendations" loading="lazy">
+                                    </div>
+                                    <div class="news-card-content">
+                                        <h3 class="news-title">COVID-19 Booster Recommendations</h3>
+                                        <p class="news-date">October 1, 2025</p>
+                                        <p class="news-summary">New boosters advised for pregnant women, available at major hospitals as of October 2025.</p>
+                                        <a href="#" class="news-link btn-secondary" data-modal="news-covid-modal">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
-                        <div class="news-card-content">
-                            <h3 class="news-title">Nepal's Journey to Rubella Elimination</h3>
-                            <p class="news-date">October 11, 2025</p>
-                            <p class="news-summary">Nepal achieves rubella elimination milestone with WHO support and enhanced vaccination efforts.</p>
-                            <a href="#" class="news-link btn-secondary" data-modal="news-rubella-modal">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="150">
-                        <div class="news-card-image">
-                            <img src="assets/news-cholera.webp" alt="Cholera Vaccination in Bara and Parsa" loading="lazy">
-                        </div>
-                        <div class="news-card-content">
-                            <h3 class="news-title">71% of Target Population Vaccinated Against Cholera in Bara and Parsa</h3>
-                            <p class="news-date">October 18, 2025</p>
-                            <p class="news-summary">Successful cholera vaccination drive reaches 71% coverage in affected areas.</p>
-                            <a href="#" class="news-link btn-secondary" data-modal="news-cholera-modal">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="news-card-image">
-                            <img src="assets/news-immunization.webp" alt="How Nepal Hit Its 100% Immunisation Target" loading="lazy">
-                        </div>
-                        <div class="news-card-content">
-                            <h3 class="news-title">How Nepal Hit Its 100% Immunisation Target</h3>
-                            <p class="news-date">August 20, 2025</p>
-                            <p class="news-summary">All 77 districts declare full immunization for children under two for the first time.</p>
-                            <a href="#" class="news-link btn-secondary" data-modal="news-immunization-modal">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="250">
-                        <div class="news-card-image">
-                            <img src="assets/news-rubella-continue.webp" alt="Nepal to Continue Rubella Shots" loading="lazy">
-                        </div>
-                        <div class="news-card-content">
-                            <h3 class="news-title">Nepal to Continue Rubella Shots Despite Eliminating the Disease</h3>
-                            <p class="news-date">August 20, 2025</p>
-                            <p class="news-summary">Rubella vaccination remains part of routine immunization program.</p>
-                            <a href="#" class="news-link btn-secondary" data-modal="news-rubella-continue-modal">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="news-card-image">
-                            <img src="assets/news-hpv.webp" alt="Fighting Cervical Cancer in Nepal" loading="lazy">
-                        </div>
-                        <div class="news-card-content">
-                            <h3 class="news-title">Fighting Cervical Cancer in Nepal with HPV Vaccination</h3>
-                            <p class="news-date">July 21, 2025</p>
-                            <p class="news-summary">Nationwide HPV vaccination program to prevent cervical cancer in girls.</p>
-                            <a href="#" class="news-link btn-secondary" data-modal="news-hpv-modal">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="350">
-                        <div class="news-card-image">
-                            <img src="assets/news-arsons.webp" alt="Nepal's Immunisation on the Brink After Arsons" loading="lazy">
-                        </div>
-                        <div class="news-card-content">
-                            <h3 class="news-title">Nepal's Immunisation on the Brink After Vaccine Stocks Gutted in Arsons</h3>
-                            <p class="news-date">September 14, 2025</p>
-                            <p class="news-summary">Thousands of vaccine doses destroyed in arson attacks on health facilities.</p>
-                            <a href="#" class="news-link btn-secondary" data-modal="news-arsons-modal">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -464,7 +485,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="bcg-title">BCG Vaccine Details</h3>
-            <p>Administered at birth. Protects against tuberculosis.</p>
+            <p>Administered at birth to protect against tuberculosis.</p>
             <video controls preload="metadata">
                 <source src="assets/bcg-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -474,8 +495,8 @@
     <div id="pentavalent-modal" class="modal" role="dialog" aria-labelledby="pentavalent-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="pentavalent-title">Pentavalent (DPT-HepB-Hib) Vaccine Details</h3>
-            <p>Doses at 6, 10, 14 weeks. Protects against diphtheria, pertussis, tetanus, hepatitis B, Haemophilus influenzae type b.</p>
+            <h3 id="pentavalent-title">Pentavalent Vaccine Details</h3>
+            <p>Protects against diphtheria, pertussis, tetanus, hepatitis B, and Haemophilus influenzae type b. Doses at 6, 10, 14 weeks.</p>
             <video controls preload="metadata">
                 <source src="assets/pentavalent-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -486,7 +507,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="opv-title">OPV Vaccine Details</h3>
-            <p>Doses at 6, 10, 14 weeks. Protects against polio.</p>
+            <p>Oral polio vaccine. Doses at 6, 10, 14 weeks.</p>
             <video controls preload="metadata">
                 <source src="assets/opv-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -497,7 +518,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="pcv-title">PCV Vaccine Details</h3>
-            <p>Doses at 6, 10 weeks, booster at 9 months. Protects against pneumococcal diseases.</p>
+            <p>Pneumococcal conjugate vaccine. Doses at 6, 10 weeks, booster at 9 months.</p>
             <video controls preload="metadata">
                 <source src="assets/pcv-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -508,7 +529,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="fipv-title">fIPV Vaccine Details</h3>
-            <p>Doses at 14 weeks and 9 months. Protects against polio.</p>
+            <p>Fractional Inactivated Polio Vaccine. Doses at 14 weeks and 9 months.</p>
             <video controls preload="metadata">
                 <source src="assets/fipv-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -519,7 +540,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="mr-title">MR Vaccine Details</h3>
-            <p>Doses at 9 and 15 months. Protects against measles and rubella.</p>
+            <p>Measles-Rubella vaccine. Doses at 9 and 15 months.</p>
             <video controls preload="metadata">
                 <source src="assets/mr-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -530,7 +551,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="je-title">JE Vaccine Details</h3>
-            <p>Dose at 12 months in endemic areas. Protects against Japanese encephalitis.</p>
+            <p>Japanese Encephalitis vaccine. Dose at 12 months in endemic areas.</p>
             <video controls preload="metadata">
                 <source src="assets/je-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -541,7 +562,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="tcv-title">TCV Vaccine Details</h3>
-            <p>Dose at 15 months. Protects against typhoid fever.</p>
+            <p>Typhoid Conjugate Vaccine. Dose at 15 months.</p>
             <video controls preload="metadata">
                 <source src="assets/tcv-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -552,7 +573,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="hpv-title">HPV Vaccine Details</h3>
-            <p>Single dose for girls aged 9-14 years. Protects against cervical cancer.</p>
+            <p>Human Papillomavirus vaccine. Single dose for girls aged 9-14 years.</p>
             <video controls preload="metadata">
                 <source src="assets/hpv-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -563,7 +584,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="td-title">Td Vaccine Details</h3>
-            <p>For pregnant women: 2 doses in first pregnancy, 1 in subsequent. Protects against tetanus and diphtheria.</p>
+            <p>Tetanus Diphtheria vaccine. For pregnant women: 2 doses in first pregnancy, 1 in subsequent.</p>
             <video controls preload="metadata">
                 <source src="assets/td-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -574,7 +595,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="tdap-title">Tdap Vaccine Details</h3>
-            <p>Recommended for pregnant women between 27-36 weeks. Protects against tetanus, diphtheria, pertussis.</p>
+            <p>Tetanus, Diphtheria, Pertussis vaccine. Recommended for pregnant women between 27-36 weeks.</p>
             <video controls preload="metadata">
                 <source src="assets/tdap-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -585,7 +606,7 @@
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="flu-title">Flu Vaccine Details</h3>
-            <p>Recommended during pregnancy. Prevents severe flu complications.</p>
+            <p>Influenza vaccine. Recommended during pregnancy to prevent severe flu complications.</p>
             <video controls preload="metadata">
                 <source src="assets/flu-video.webm" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
@@ -605,46 +626,25 @@
     </div>
 
     <!-- News Modals -->
-    <div id="news-rubella-modal" class="modal" role="dialog" aria-labelledby="news-rubella-title" aria-hidden="true">
+    <div id="news-tdap-modal" class="modal" role="dialog" aria-labelledby="news-tdap-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-rubella-title">Nepal's Journey to Rubella Elimination</h3>
-            <p>Nepal achieves rubella elimination with enhanced vaccination efforts and WHO support.</p>
+            <h3 id="news-tdap-title">New Tdap Guidelines for 2025</h3>
+            <p>Updated Tdap recommendations to enhance newborn protection during pregnancy.</p>
         </div>
     </div>
-    <div id="news-cholera-modal" class="modal" role="dialog" aria-labelledby="news-cholera-title" aria-hidden="true">
+    <div id="news-mmr-modal" class="modal" role="dialog" aria-labelledby="news-mmr-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-cholera-title">71% of Target Population Vaccinated Against Cholera</h3>
-            <p>Successful cholera vaccination in Bara and Parsa districts.</p>
+            <h3 id="news-mmr-title">Postpartum Vaccine Campaign in Nepal</h3>
+            <p>Free MMR vaccines for new mothers and infants in rural areas.</p>
         </div>
     </div>
-    <div id="news-immunization-modal" class="modal" role="dialog" aria-labelledby="news-immunization-title" aria-hidden="true">
+    <div id="news-covid-modal" class="modal" role="dialog" aria-labelledby="news-covid-title" aria-hidden="true">
         <div class="modal-content">
             <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-immunization-title">How Nepal Hit Its 100% Immunisation Target</h3>
-            <p>All districts achieve full immunization for children under two.</p>
-        </div>
-    </div>
-    <div id="news-rubella-continue-modal" class="modal" role="dialog" aria-labelledby="news-rubella-continue-title" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-rubella-continue-title">Nepal to Continue Rubella Shots Despite Elimination</h3>
-            <p>Rubella vaccination remains in routine program.</p>
-        </div>
-    </div>
-    <div id="news-hpv-modal" class="modal" role="dialog" aria-labelledby="news-hpv-title" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-hpv-title">Fighting Cervical Cancer in Nepal with HPV Vaccination</h3>
-            <p>Nationwide HPV program to prevent cervical cancer.</p>
-        </div>
-    </div>
-    <div id="news-arsons-modal" class="modal" role="dialog" aria-labelledby="news-arsons-title" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="Close">&times;</button>
-            <h3 id="news-arsons-title">Nepal's Immunisation on the Brink After Arsons</h3>
-            <p>Vaccine stocks destroyed in arson attacks on health facilities.</p>
+            <h3 id="news-covid-title">COVID-19 Booster Recommendations</h3>
+            <p>New boosters advised for pregnant women.</p>
         </div>
     </div>
 
@@ -658,6 +658,7 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>

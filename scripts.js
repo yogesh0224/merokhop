@@ -7,6 +7,45 @@ function initAOS() {
     });
 }
 
+// Swiper Initialization
+function initSwiper() {
+    const sliders = document.querySelectorAll('.vaccine-slider, .news-slider');
+    sliders.forEach(slider => {
+        new Swiper(slider, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoHeight: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1440: {
+                    slidesPerView: 4,
+                    spaceBetween: 40,
+                },
+            },
+        });
+    });
+}
+
 // Navbar Toggle
 function initNavbar() {
     const menuToggle = document.querySelector('.menu-toggle');
@@ -370,6 +409,7 @@ function initAuth() {
 // Initialize All Features
 document.addEventListener('DOMContentLoaded', () => {
     initAOS();
+    initSwiper();
     initNavbar();
     initSmoothScroll();
     initTheme();
