@@ -161,6 +161,8 @@ function initScheduler() {
     const resetButton = document.getElementById('reset-schedule');
     const exportButton = document.getElementById('export-schedule');
     const errorDiv = document.getElementById('schedule-error');
+    const dobLabel = document.getElementById('dob-label');
+    const typeRadios = document.querySelectorAll('input[name="type"]');
     if (!schedulerForm || !scheduleResult || !scheduleBody || !notificationArea) return;
     const vaccineSchedule = [
         { name: 'BCG', dose: 'At birth', months: 0 },
@@ -181,11 +183,11 @@ function initScheduler() {
         { name: 'TCV', dose: '1st', months: 15 }
     ];
     const maternalSchedule = [
-        { name: 'Td', dose: '1st', weeks: 16 },
-        { name: 'Td', dose: '2nd (if first pregnancy)', weeks: 20 },
-        { name: 'Tdap', dose: '1st', weeks: 27 },
-        { name: 'Flu', dose: '1st', weeks: 0 },
-        { name: 'COVID-19', dose: 'As recommended', weeks: 0 }
+        { name: 'Td', dose: '1st (all pregnancies)', weeks: 16 },
+        { name: 'Td', dose: '2nd (first pregnancy only)', weeks: 20 },
+        { name: 'Tdap', dose: '1st', weeks: 28 },
+        { name: 'Flu', dose: '1st', weeks: 12 },
+        { name: 'COVID-19', dose: '1st', weeks: 12 }
     ];
     function showToast(message) {
         notificationArea.textContent = message;
@@ -200,53 +202,58 @@ function initScheduler() {
         due.setMonth(dob.getMonth() + months);
         return due.toISOString().split('T')[0];
     }
-    function calculatePregnancyDueDate(edd, weeks) {
+    function calculatePregDueDate(edd, weeks) {
         const due = new Date(edd);
         due.setDate(due.getDate() - (weeks * 7));
         return due.toISOString().split('T')[0];
     }
     function getStatus(dueDate) {
-        const today = new Date('2025-10-29');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
         const due = new Date(dueDate);
+        due.setHours(0, 0, 0, 0);
         if (due < today) return 'past';
-        if (due.toDateString() === today.toDateString()) return 'due-today';
+        if (due.getTime() === today.getTime()) return 'due-today';
         return 'upcoming';
     }
-    function applyCompletedStyles() {
-        const rows = scheduleBody.querySelectorAll('tr');
-        rows.forEach(row => {
-            const checkbox = row.querySelector('input[type="checkbox"]');
-            if (checkbox && checkbox.checked) {
-                row.classList.add('completed');
-            }
-        });
-    }
-    scheduleBody.addEventListener('change', (e) => {
-        if (e.target.type === 'checkbox') {
-            const row = e.target.closest('tr');
-            if (e.target.checked) {
-                row.classList.add('completed');
-            } else {
-                row.classList.remove('completed');
-            }
+    function updateProgress() {
+        const checkboxes = scheduleBody.querySelectorAll('.taken-checkbox');
+        const total = checkboxes.length;
+        const completed = Array.from(checkboxes).filter(cb => cb.checked).length;
+        const percentage = total > 0 ? (completed / total) * 100 : 0;
+        const progressFill = document.querySelector('.progress-fill');
+        if (progressFill) {
+            progressFill.style.width = `${percentage}%`;
         }
+        if (percentage === 100) {
+            showToast('Congratulations! All vaccines completed.');
+        }
+    }
+    typeRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            dobLabel.textContent = radio.value === 'child' ? "Child's Date of Birth" : "Expected Due Date";
+        });
     });
     schedulerForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const dobInput = document.getElementById('dob');
-        const dob = new Date(dobInput.value);
-        const isPregnancy = document.getElementById('pregnancy').checked;
-        const schedule = isPregnancy ? maternalSchedule : vaccineSchedule;
-        const calcDue = isPregnancy ? calculatePregnancyDueDate : calculateDueDate;
-        const unit = isPregnancy ? 'weeks' : 'months';
-        if (!dobInput.value || isNaN(dob.getTime()) || dob > new Date('2025-10-29')) {
-            errorDiv.textContent = 'Please enter a valid date (not in the future).';
+        const type = document.querySelector('input[name="type"]:checked').value;
+        const dateValue = document.getElementById('dob').value;
+        const date = new Date(dateValue);
+        if (!dateValue || isNaN(date.getTime())) {
+            errorDiv.textContent = 'Please enter a valid date.';
+            return;
+        }
+        if (type === 'child' && date > new Date()) {
+            errorDiv.textContent = 'Date of birth cannot be in the future.';
             return;
         }
         errorDiv.textContent = '';
         scheduleBody.innerHTML = '';
+        const schedule = type === 'child' ? vaccineSchedule : maternalSchedule;
+        const calcDue = type === 'child' ? calculateDueDate : calculatePregDueDate;
+        const unit = type === 'child' ? 'months' : 'weeks';
         schedule.forEach(vaccine => {
-            const dueDate = calcDue(dob, vaccine[unit]);
+            const dueDate = calcDue(date, vaccine[unit]);
             const status = getStatus(dueDate);
             const row = document.createElement('tr');
             row.classList.add(status);
@@ -255,16 +262,23 @@ function initScheduler() {
                 <td>${vaccine.dose}</td>
                 <td>${dueDate}</td>
                 <td>${status.replace('-', ' ').toUpperCase()}</td>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" class="taken-checkbox"></td>
             `;
             scheduleBody.appendChild(row);
         });
         scheduleResult.style.display = 'block';
-        applyCompletedStyles();
+        updateProgress();
         showToast('Schedule generated successfully!');
-        const upcoming = Array.from(scheduleBody.rows).filter(row => row.classList.contains('upcoming')).map(row => row.cells[0].textContent);
-        if (upcoming.length > 0) {
-            showToast(`Upcoming vaccines: ${upcoming.join(', ')}`);
+    });
+    scheduleBody.addEventListener('change', (e) => {
+        if (e.target.classList.contains('taken-checkbox')) {
+            const row = e.target.closest('tr');
+            if (e.target.checked) {
+                row.classList.add('completed');
+            } else {
+                row.classList.remove('completed');
+            }
+            updateProgress();
         }
     });
     if (saveButton) {
@@ -274,7 +288,7 @@ function initScheduler() {
                 dose: row.cells[1].textContent,
                 dueDate: row.cells[2].textContent,
                 status: row.cells[3].textContent,
-                taken: row.querySelector('input[type="checkbox"]').checked
+                taken: row.querySelector('.taken-checkbox').checked
             }));
             localStorage.setItem('vaccineSchedule', JSON.stringify(tableData));
             showToast('Schedule saved successfully!');
@@ -294,12 +308,13 @@ function initScheduler() {
                         <td>${data.dose}</td>
                         <td>${data.dueDate}</td>
                         <td>${data.status}</td>
-                        <td><input type="checkbox" ${data.taken ? 'checked' : ''}></td>
+                        <td><input type="checkbox" class="taken-checkbox" ${data.taken ? 'checked' : ''}></td>
                     `;
+                    if (data.taken) row.classList.add('completed');
                     scheduleBody.appendChild(row);
                 });
                 scheduleResult.style.display = 'block';
-                applyCompletedStyles();
+                updateProgress();
                 showToast('Schedule loaded successfully!');
             } else {
                 showToast('No saved schedule found.');

@@ -322,18 +322,26 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Personalized Vaccine Scheduler</h2>
-                    <p class="section-subtitle">Enter your child's details for a customized vaccination plan with timely alerts and progress tracking.</p>
+                    <p class="section-subtitle">Enter your details for a customized vaccination plan with timely alerts and progress tracking.</p>
                 </div>
                 <div class="scheduler-wrapper">
                     <form id="scheduler-form" class="scheduler-form">
                         <div class="form-group">
-                            <label for="dob" class="form-label">Child's Date of Birth</label>
-                            <input type="date" id="dob" class="form-input" required aria-describedby="schedule-error" max="2025-10-29">
+                            <label>Schedule for:</label>
+                            <input type="radio" id="child" name="type" value="child" checked> Child
+                            <input type="radio" id="pregnant" name="type" value="pregnant"> Pregnant Woman
+                        </div>
+                        <div class="form-group">
+                            <label for="dob" id="dob-label" class="form-label">Child's Date of Birth</label>
+                            <input type="date" id="dob" class="form-input" required aria-describedby="schedule-error">
                             <div id="schedule-error" class="error-message" role="alert"></div>
                         </div>
                         <button type="submit" id="generate-schedule" class="schedule-btn btn-primary">Generate Schedule</button>
                     </form>
                     <div id="schedule-result" class="schedule-result" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
                         <div class="schedule-table-container">
                             <table class="schedule-table">
                                 <thead>
@@ -342,6 +350,7 @@
                                         <th>Dose</th>
                                         <th>Due Date</th>
                                         <th>Status</th>
+                                        <th>Taken</th>
                                     </tr>
                                 </thead>
                                 <tbody id="schedule-body"></tbody>
@@ -448,7 +457,7 @@
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">How do vaccine reminders work?</button>
                         <div class="faq-answer">
-                            <p>Based on your child's birth date, we generate a personalized schedule aligned with Nepal's guidelines and send timely alerts.</p>
+                            <p>Based on your child's birth date or pregnancy due date, we generate a personalized schedule aligned with Nepal's guidelines and send timely alerts.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -460,7 +469,7 @@
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">Can I customize the schedule?</button>
                         <div class="faq-answer">
-                            <p>Absolutely—save, load, reset, or export your schedule to fit your needs.</p>
+                            <p>Absolutely—save, load, reset, or export your schedule to fit your needs. You can also mark vaccines as taken.</p>
                         </div>
                     </div>
                 </div>
