@@ -394,14 +394,12 @@ body {
 
 .vaccine-card {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 320px; /* Set fixed height for uniformity */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .vaccine-card:hover {
@@ -428,26 +426,45 @@ body {
     margin: 0;
 }
 
+.vaccine-card-image {
+    position: relative;
+}
+
 .vaccine-card-image img {
     width: 100%;
-    height: 140px; /* Reduced height for compactness */
+    height: 180px;
     object-fit: cover;
 }
 
+.vaccine-card-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+}
+
 .vaccine-card-content {
-    padding: calc(0.75 * var(--spacing-unit)); /* Reduced padding */
+    padding: var(--spacing-unit);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: left;
 }
 
 .vaccine-card-content .card-description {
     font-size: clamp(0.9rem, 1.4vw, 1rem);
     color: #666;
-    margin-bottom: calc(0.75 * var(--spacing-unit)); /* Reduced margin */
-    line-height: 1.4; /* Slightly tighter line height */
-    flex-grow: 1;
+    margin-bottom: var(--spacing-unit);
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .vaccine-card-content .card-link {
@@ -483,11 +500,8 @@ body {
 }
 
 @media (max-width: 640px) {
-    .vaccine-card {
-        height: auto;
-    }
     .vaccine-card-image img {
-        height: 120px;
+        height: 150px;
     }
 }
 
@@ -594,6 +608,11 @@ body {
     background: #d4edda;
 }
 
+.schedule-table tr.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
 .schedule-controls {
     display: flex;
     gap: var(--spacing-unit);
@@ -652,10 +671,10 @@ body {
 
 .news-card {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .news-card:hover {
@@ -674,6 +693,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    text-align: left;
 }
 
 .news-title {
@@ -691,7 +711,11 @@ body {
     font-size: clamp(0.9rem, 1.4vw, 1rem);
     color: #666;
     line-height: 1.5;
-    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .news-link {

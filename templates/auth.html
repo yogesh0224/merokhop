@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +8,13 @@
     <meta name="author" content="Mero Khop Team">
     <meta property="og:title" content="Mero Khop - Secure Access">
     <meta property="og:description" content="Login or register to access personalized vaccine schedules.">
-    <meta property="og:image" content="assets/logo.svg">
+    <meta property="og:image" content="{% static 'assets/logo.svg' %}">
     <meta property="og:url" content="https://merokhop.com/auth">
     <title>मेरो खोप - Secure Access</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="{% static 'assets/logo.svg' %}" type="image/svg+xml">
 </head>
 <body data-theme="light">
     <header class="header">
@@ -28,17 +29,17 @@
                         <line x1="90" y1="32" x2="85" y2="28" stroke="var(--primary-color)" stroke-width="4"/>
                         <line x1="90" y1="32" x2="85" y2="36" stroke="var(--primary-color)" stroke-width="4"/>
                     </svg>
-                    <a href="index.html" class="navbar-logo nepal-font">मेरो खोप</a>
+                    <a href="{% url 'index' %}" class="navbar-logo nepal-font">मेरो खोप</a>
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="index.html#vaccines" class="nav-link">Vaccines</a></li>
-                    <li class="nav-item"><a href="index.html#scheduler" class="nav-link">Scheduler</a></li>
-                    <li class="nav-item"><a href="index.html#news" class="nav-link">News & Updates</a></li>
-                    <li class="nav-item"><a href="index.html#faqs" class="nav-link">FAQs</a></li>
+                    <li class="nav-item"><a href="{% url 'index' %}#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'index' %}#vaccines" class="nav-link">Vaccines</a></li>
+                    <li class="nav-item"><a href="{% url 'index' %}#scheduler" class="nav-link">Scheduler</a></li>
+                    <li class="nav-item"><a href="{% url 'index' %}#news" class="nav-link">News & Updates</a></li>
+                    <li class="nav-item"><a href="{% url 'index' %}#faqs" class="nav-link">FAQs</a></li>
                 </ul>
             </div>
         </nav>
@@ -74,7 +75,8 @@
                 <div class="auth-content">
                     <!-- Login Form -->
                     <div class="tab-pane active" id="login">
-                        <form id="login-form" class="auth-form" method="post" action="" novalidate>
+                        <form id="login-form" class="auth-form" method="post" action="{% url 'login' %}" novalidate>
+                            {% csrf_token %}
                             <div class="input-group">
                                 <div class="input-wrapper">
                                     <i class="fas fa-envelope input-icon"></i>
@@ -96,7 +98,7 @@
                                     <span class="checkmark"></span>
                                     Remember Me
                                 </label>
-                                <a href="#" class="forgot-password" data-modal="forgot-password-modal">Forgot Password?</a>
+                                <a href="{% url 'forgot_password' %}" class="forgot-password" data-modal="forgot-password-modal">Forgot Password?</a>
                             </div>
                             <button type="submit" class="auth-btn btn-primary">
                                 <i class="fas fa-sign-in-alt"></i>
@@ -108,7 +110,8 @@
 
                     <!-- Register Form -->
                     <div class="tab-pane" id="register" style="display: none;">
-                        <form id="register-form" class="auth-form" method="post" action="" novalidate>
+                        <form id="register-form" class="auth-form" method="post" action="{% url 'register' %}" novalidate>
+                            {% csrf_token %}
                             <div class="input-group">
                                 <div class="input-wrapper">
                                     <i class="fas fa-user input-icon"></i>
@@ -209,6 +212,6 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>

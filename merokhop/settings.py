@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!v=6h1+3@&y1%z8x4b#r!0^o%*h!2k^!5#^&*u^!0^o%*h!2k'
+SECRET_KEY = 'django-insecure-!v=66h1+3@&y1%z8x4b#r!0^o%*h!2k^!5#^&*u^!0^o%*h!2k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'khop',  # New app created here 
+    'khop',  # created app called khop
 ]
 
 MIDDLEWARE = [
@@ -124,3 +124,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication redirects
+LOGIN_REDIRECT_URL = '/'  # Redirect to home after login
+LOGOUT_REDIRECT_URL = '/'  # Redirect to home after logout
+LOGIN_URL = '/auth/'  # Redirect to auth page if not logged in

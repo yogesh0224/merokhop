@@ -180,6 +180,13 @@ function initScheduler() {
         { name: 'MR', dose: '2nd', months: 15 },
         { name: 'TCV', dose: '1st', months: 15 }
     ];
+    const maternalSchedule = [
+        { name: 'Td', dose: '1st', weeks: 16 },
+        { name: 'Td', dose: '2nd (if first pregnancy)', weeks: 20 },
+        { name: 'Tdap', dose: '1st', weeks: 27 },
+        { name: 'Flu', dose: '1st', weeks: 0 },
+        { name: 'COVID-19', dose: 'As recommended', weeks: 0 }
+    ];
     function showToast(message) {
         notificationArea.textContent = message;
         notificationArea.style.display = 'block';
@@ -193,25 +200,53 @@ function initScheduler() {
         due.setMonth(dob.getMonth() + months);
         return due.toISOString().split('T')[0];
     }
+    function calculatePregnancyDueDate(edd, weeks) {
+        const due = new Date(edd);
+        due.setDate(due.getDate() - (weeks * 7));
+        return due.toISOString().split('T')[0];
+    }
     function getStatus(dueDate) {
-        const today = new Date('2025-10-22');
+        const today = new Date('2025-10-29');
         const due = new Date(dueDate);
         if (due < today) return 'past';
         if (due.toDateString() === today.toDateString()) return 'due-today';
         return 'upcoming';
     }
+    function applyCompletedStyles() {
+        const rows = scheduleBody.querySelectorAll('tr');
+        rows.forEach(row => {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            if (checkbox && checkbox.checked) {
+                row.classList.add('completed');
+            }
+        });
+    }
+    scheduleBody.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+            const row = e.target.closest('tr');
+            if (e.target.checked) {
+                row.classList.add('completed');
+            } else {
+                row.classList.remove('completed');
+            }
+        }
+    });
     schedulerForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const dobInput = document.getElementById('dob');
         const dob = new Date(dobInput.value);
-        if (!dobInput.value || isNaN(dob.getTime()) || dob > new Date('2025-10-22')) {
-            errorDiv.textContent = 'Please enter a valid date of birth (not in the future).';
+        const isPregnancy = document.getElementById('pregnancy').checked;
+        const schedule = isPregnancy ? maternalSchedule : vaccineSchedule;
+        const calcDue = isPregnancy ? calculatePregnancyDueDate : calculateDueDate;
+        const unit = isPregnancy ? 'weeks' : 'months';
+        if (!dobInput.value || isNaN(dob.getTime()) || dob > new Date('2025-10-29')) {
+            errorDiv.textContent = 'Please enter a valid date (not in the future).';
             return;
         }
         errorDiv.textContent = '';
         scheduleBody.innerHTML = '';
-        vaccineSchedule.forEach(vaccine => {
-            const dueDate = calculateDueDate(dob, vaccine.months);
+        schedule.forEach(vaccine => {
+            const dueDate = calcDue(dob, vaccine[unit]);
             const status = getStatus(dueDate);
             const row = document.createElement('tr');
             row.classList.add(status);
@@ -220,19 +255,26 @@ function initScheduler() {
                 <td>${vaccine.dose}</td>
                 <td>${dueDate}</td>
                 <td>${status.replace('-', ' ').toUpperCase()}</td>
+                <td><input type="checkbox"></td>
             `;
             scheduleBody.appendChild(row);
         });
         scheduleResult.style.display = 'block';
+        applyCompletedStyles();
         showToast('Schedule generated successfully!');
+        const upcoming = Array.from(scheduleBody.rows).filter(row => row.classList.contains('upcoming')).map(row => row.cells[0].textContent);
+        if (upcoming.length > 0) {
+            showToast(`Upcoming vaccines: ${upcoming.join(', ')}`);
+        }
     });
     if (saveButton) {
         saveButton.addEventListener('click', () => {
-            const tableData = Array.from(scheduleBody.children).map(row => ({
-                vaccine: row.children[0].textContent,
-                dose: row.children[1].textContent,
-                dueDate: row.children[2].textContent,
-                status: row.children[3].textContent
+            const tableData = Array.from(scheduleBody.rows).map(row => ({
+                vaccine: row.cells[0].textContent,
+                dose: row.cells[1].textContent,
+                dueDate: row.cells[2].textContent,
+                status: row.cells[3].textContent,
+                taken: row.querySelector('input[type="checkbox"]').checked
             }));
             localStorage.setItem('vaccineSchedule', JSON.stringify(tableData));
             showToast('Schedule saved successfully!');
@@ -246,16 +288,18 @@ function initScheduler() {
                 scheduleBody.innerHTML = '';
                 tableData.forEach(data => {
                     const row = document.createElement('tr');
-                    row.classList.add(data.status.toLowerCase().replace(' ', '-'));
+                    row.classList.add(data.status);
                     row.innerHTML = `
                         <td>${data.vaccine}</td>
                         <td>${data.dose}</td>
                         <td>${data.dueDate}</td>
                         <td>${data.status}</td>
+                        <td><input type="checkbox" ${data.taken ? 'checked' : ''}></td>
                     `;
                     scheduleBody.appendChild(row);
                 });
                 scheduleResult.style.display = 'block';
+                applyCompletedStyles();
                 showToast('Schedule loaded successfully!');
             } else {
                 showToast('No saved schedule found.');
@@ -272,10 +316,10 @@ function initScheduler() {
     }
     if (exportButton) {
         exportButton.addEventListener('click', () => {
-            const tableData = Array.from(scheduleBody.children).map(row => ({
-                vaccine: row.children[0].textContent,
-                dose: row.children[1].textContent,
-                dueDate: row.children[2].textContent
+            const tableData = Array.from(scheduleBody.rows).map(row => ({
+                vaccine: row.cells[0].textContent,
+                dose: row.cells[1].textContent,
+                dueDate: row.cells[2].textContent
             }));
             const icsContent = [
                 'BEGIN:VCALENDAR',

@@ -32,7 +32,7 @@
                         <line x1="90" y1="32" x2="85" y2="28" stroke="var(--primary-color)" stroke-width="4"/>
                         <line x1="90" y1="32" x2="85" y2="36" stroke="var(--primary-color)" stroke-width="4"/>
                     </svg>
-                    <a href="#home" class="navbar-logo nepal-font">मेरो खोप</a>
+                    <a href="{% url 'index' %}" class="navbar-logo nepal-font">मेरो खोप</a>
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
@@ -61,7 +61,11 @@
                     <li class="nav-item"><a href="#scheduler" class="nav-link">Scheduler</a></li>
                     <li class="nav-item"><a href="#news" class="nav-link">News & Updates</a></li>
                     <li class="nav-item"><a href="#faqs" class="nav-link">FAQs</a></li>
-                    <li class="nav-item"><a href="{% url 'auth' %}" class="nav-link btn-primary">Login/Register</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link btn-primary">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a href="{% url 'auth' %}" class="nav-link btn-primary">Login/Register</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -117,7 +121,126 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Add other child vaccine slides similarly -->
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Pentavalent (DPT-HepB-Hib)</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/pentavalent.webp' %}" alt="Pentavalent Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 6, 10, 14 weeks. Protects against diphtheria, pertussis, tetanus, hepatitis B, Haemophilus influenzae type b.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="pentavalent-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">OPV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/opv.webp' %}" alt="OPV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Oral doses at 6, 10, 14 weeks to prevent polio.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="opv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">PCV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/pcv.webp' %}" alt="PCV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 6, 10 weeks, booster at 9 months. Protects against pneumococcal diseases.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="pcv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">fIPV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/fipv.webp' %}" alt="fIPV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 14 weeks and 9 months to prevent polio.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="fipv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">MR</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/mr.webp' %}" alt="MR Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Doses at 9 and 15 months to protect against measles and rubella.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="mr-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">JE</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/je.webp' %}" alt="JE Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Dose at 12 months in endemic areas to protect against Japanese encephalitis.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="je-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">TCV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/tcv.webp' %}" alt="TCV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Dose at 15 months to protect against typhoid fever.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="tcv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">HPV</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/hpv.webp' %}" alt="HPV Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Single dose for girls aged 9-14 years to prevent cervical cancer.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="hpv-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="swiper-pagination"></div>
                             <div class="swiper-button-next"></div>
@@ -145,7 +268,51 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Add other maternal vaccine slides similarly -->
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Tdap</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/tdap.webp' %}" alt="Tdap Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Recommended for pregnant women between 27-36 weeks to protect newborns from whooping cough.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="tdap-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">Flu</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/flu.webp' %}" alt="Flu Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Recommended during pregnancy to prevent severe flu complications for mothers and babies.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="flu-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="vaccine-card">
+                                        <div class="vaccine-card-header">
+                                            <i class="fas fa-syringe card-icon" aria-hidden="true"></i>
+                                            <h4 class="card-title">COVID-19</h4>
+                                        </div>
+                                        <div class="vaccine-card-image">
+                                            <img src="{% static 'assets/covid.webp' %}" alt="COVID-19 Vaccine" loading="lazy">
+                                        </div>
+                                        <div class="vaccine-card-content">
+                                            <p class="card-description">Safe for pregnant women, reduces severe illness; consult your doctor for timing.</p>
+                                            <a href="#" class="card-link btn-secondary" data-modal="covid-modal">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="swiper-pagination"></div>
                             <div class="swiper-button-next"></div>
@@ -156,7 +323,200 @@
             </div>
         </section>
 
+        <section id="scheduler" class="scheduler-section section-padding" data-aos="fade-up">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Personalized Vaccine Scheduler</h2>
+                    <p class="section-subtitle">Enter your child's details for a customized vaccination plan with timely alerts and progress tracking.</p>
+                </div>
+                <div class="scheduler-wrapper">
+                    <form id="scheduler-form" class="scheduler-form">
+                        <div class="form-group">
+                            <label for="dob" class="form-label">Child's Date of Birth</label>
+                            <input type="date" id="dob" class="form-input" required aria-describedby="schedule-error" max="2025-10-22">
+                            <div id="schedule-error" class="error-message" role="alert"></div>
+                        </div>
+                        <button type="submit" id="generate-schedule" class="schedule-btn btn-primary">Generate Schedule</button>
+                    </form>
+                    <div id="schedule-result" class="schedule-result" style="display: none;">
+                        <div class="schedule-table-container">
+                            <table class="schedule-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vaccine</th>
+                                        <th>Dose</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schedule-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="schedule-controls">
+                            <button id="save-schedule" class="btn-secondary">Save Schedule</button>
+                            <button id="load-schedule" class="btn-secondary">Load Schedule</button>
+                            <button id="reset-schedule" class="btn-secondary">Reset</button>
+                            <button id="export-schedule" class="btn-secondary">Export to Calendar</button>
+                        </div>
+                    </div>
+                    <div id="notification-area" class="notification-area" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="news-section section-padding" data-aos="fade-up">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Latest News & Updates</h2>
+                    <p class="section-subtitle">Stay informed with the latest developments in vaccination and maternal health.</p>
+                </div>
+                <div class="slider-container">
+                    <div class="swiper news-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <article class="news-card">
+                                    <div class="news-card-image">
+                                        <img src="{% static 'assets/news-tdap.webp' %}" alt="New Tdap Guidelines" loading="lazy">
+                                    </div>
+                                    <div class="news-card-content">
+                                        <h3 class="news-title">New Tdap Guidelines for 2025</h3>
+                                        <p class="news-date">October 14, 2025</p>
+                                        <p class="news-summary">Updated Tdap recommendations to enhance newborn protection during pregnancy, effective immediately.</p>
+                                        <a href="#" class="news-link btn-secondary" data-modal="news-tdap-modal">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="swiper-slide">
+                                <article class="news-card">
+                                    <div class="news-card-image">
+                                        <img src="{% static 'assets/news-mmr.webp' %}" alt="Postpartum Vaccine Campaign" loading="lazy">
+                                    </div>
+                                    <div class="news-card-content">
+                                        <h3 class="news-title">Postpartum Vaccine Campaign in Nepal</h3>
+                                        <p class="news-date">October 10, 2025</p>
+                                        <p class="news-summary">Free MMR vaccines for new mothers and infants in rural areas, extended to December 2025.</p>
+                                        <a href="#" class="news-link btn-secondary" data-modal="news-mmr-modal">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="swiper-slide">
+                                <article class="news-card">
+                                    <div class="news-card-image">
+                                        <img src="{% static 'assets/news-covid.webp' %}" alt="COVID-19 Booster Recommendations" loading="lazy">
+                                    </div>
+                                    <div class="news-card-content">
+                                        <h3 class="news-title">COVID-19 Booster Recommendations</h3>
+                                        <p class="news-date">October 1, 2025</p>
+                                        <p class="news-summary">New boosters advised for pregnant women, available at major hospitals as of October 2025.</p>
+                                        <a href="#" class="news-link btn-secondary" data-modal="news-covid-modal">Read More <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials-section section-padding" data-aos="fade-up">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">What Our Users Say</h2>
+                    <p class="section-subtitle">Hear from parents and caregivers who rely on Mero Khop for their family's health.</p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-item">
+                        <p>"Mero Khop made tracking my baby's vaccines so easy. The reminders are a lifesaver!"</p>
+                        <cite>- Anita, Mother of Two</cite>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Professional and reliable. Helped us stay on top of vaccinations during pregnancy."</p>
+                        <cite>- Rajesh, Expectant Father</cite>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"The app's design is clean and intuitive. Highly recommend for Nepali families."</p>
+                        <cite>- Dr. Sharma, Pediatrician</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faqs" class="faq-section section-padding" data-aos="fade-up">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">How do vaccine reminders work?</button>
+                        <div class="faq-answer">
+                            <p>Based on your child's birth date, we generate a personalized schedule aligned with Nepal's guidelines and send timely alerts.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">Is my data secure?</button>
+                        <div class="faq-answer">
+                            <p>Yes, we prioritize privacy with secure storage and compliance with health data regulations. See our privacy policy for details.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">Can I customize the schedule?</button>
+                        <div class="faq-answer">
+                            <p>Absolutely—save, load, reset, or export your schedule to fit your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 22, 2025.</p>
+            <p class="privacy-notice">Your privacy is our priority. We never share data without consent. <a href="#" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
+            <div class="social-links">
+                <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/merokhop" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/merokhop" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vaccine Modals -->
+    <div id="bcg-modal" class="modal" role="dialog" aria-labelledby="bcg-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <h3 id="bcg-title">BCG Vaccine Details</h3>
+            <p>Administered at birth to protect against tuberculosis.</p>
+            <video controls preload="metadata">
+                <source src="{% static 'assets/bcg-video.webm' %}" type="video/webm">
+                <p>Video unavailable. Please contact support for more details.</p>
+            </video>
+        </div>
+    </div>
+    <!-- Add modals for other vaccines similarly -->
+
+    <!-- News Modals -->
+    <div id="news-tdap-modal" class="modal" role="dialog" aria-labelledby="news-tdap-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <h3 id="news-tdap-title">New Tdap Guidelines for 2025</h3>
+            <p>Updated Tdap recommendations to enhance newborn protection during pregnancy.</p>
+        </div>
+    </div>
+    <!-- Add other news modals similarly -->
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal" role="dialog" aria-labelledby="privacy-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <h3 id="privacy-title">Privacy Policy</h3>
+            <p>We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards.</p>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
