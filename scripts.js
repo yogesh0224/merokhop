@@ -1,3 +1,4 @@
+// Full Updated scripts.js
 // AOS Initialization
 function initAOS() {
     AOS.init({
@@ -57,6 +58,15 @@ function initNavbar() {
             navMenu.classList.toggle('active');
         });
     }
+    // Back to Top
+    const backToTop = document.querySelector('.back-to-top') || document.createElement('a');
+    backToTop.classList.add('back-to-top');
+    backToTop.href = '#home';
+    backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    document.body.appendChild(backToTop);
+    window.addEventListener('scroll', () => {
+        backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
 }
 
 // Smooth Scrolling
@@ -147,6 +157,25 @@ function initFAQ() {
             const answer = question.nextElementSibling;
             answer.style.display = isExpanded ? 'none' : 'block';
         });
+    });
+}
+
+// Testimonials Carousel
+function initTestimonials() {
+    const items = document.querySelectorAll('.testimonial-item');
+    if (items.length === 0) return;
+    let current = 0;
+    setInterval(() => {
+        items.forEach(item => item.style.display = 'none');
+        items[current].style.display = 'block';
+        current = (current + 1) % items.length;
+    }, 5000);
+}
+
+// Simple Parallax
+function initParallax() {
+    window.addEventListener('scroll', () => {
+        document.documentElement.style.setProperty('--scroll-y', window.scrollY + 'px');
     });
 }
 
@@ -359,6 +388,7 @@ function initScheduler() {
             showToast('Schedule exported to calendar!');
         });
     }
+    document.getElementById('dob')?.focus();
 }
 
 // Auth Form Handling
@@ -463,6 +493,14 @@ function initAuth() {
             icon.className = input.type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
         });
     });
+    const passwordInput = document.getElementById('register-password');
+    if (passwordInput) {
+        passwordInput.addEventListener('input', () => {
+            const strength = passwordInput.value.length >= 8 ? 'Strong' : 'Weak';
+            const errorDiv = document.getElementById('register-error');
+            errorDiv.textContent = `Password strength: ${strength}`;
+        });
+    }
 }
 
 // Initialize All Features
@@ -476,4 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initFAQ();
     initScheduler();
     initAuth();
+    initTestimonials();
+    initParallax();
 });
