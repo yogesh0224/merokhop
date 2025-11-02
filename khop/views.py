@@ -9,7 +9,9 @@ from .forms import RegistrationForm, LoginForm, ForgotPasswordForm
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 import icalendar
+from django.views.decorators.csrf import csrf_protect
 
+@csrf_protect
 def home(request):
     child_vaccines = Vaccine.objects.filter(category='child')
     maternal_vaccines = Vaccine.objects.filter(category='maternal')
@@ -21,6 +23,7 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
+@csrf_protect
 def auth_view(request):
     if request.method == 'POST':
         if 'login' in request.POST:
@@ -68,6 +71,7 @@ def logout_view(request):
     return redirect('home')
 
 @login_required
+@csrf_protect
 def scheduler(request):
     if request.method == 'POST':
         schedule_type = request.POST.get('type')
