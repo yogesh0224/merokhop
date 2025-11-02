@@ -1,4 +1,5 @@
 {% load static %}
+<!-- Full Updated auth.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +18,7 @@
     <link rel="icon" href="{% static 'assets/logo.svg' %}" type="image/svg+xml">
 </head>
 <body data-theme="light">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header">
         <nav class="navbar">
             <div class="navbar-container">
@@ -29,17 +31,17 @@
                         <line x1="90" y1="32" x2="85" y2="28" stroke="var(--primary-color)" stroke-width="4"/>
                         <line x1="90" y1="32" x2="85" y2="36" stroke="var(--primary-color)" stroke-width="4"/>
                     </svg>
-                    <a href="{% url 'index' %}" class="navbar-logo nepal-font">मेरो खोप</a>
+                    <a href="{% url 'home' %}#home" class="navbar-logo nepal-font">मेरो खोप</a>
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="{% url 'index' %}#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="{% url 'index' %}#vaccines" class="nav-link">Vaccines</a></li>
-                    <li class="nav-item"><a href="{% url 'index' %}#scheduler" class="nav-link">Scheduler</a></li>
-                    <li class="nav-item"><a href="{% url 'index' %}#news" class="nav-link">News & Updates</a></li>
-                    <li class="nav-item"><a href="{% url 'index' %}#faqs" class="nav-link">FAQs</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#vaccines" class="nav-link">Vaccines</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#scheduler" class="nav-link">Scheduler</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#news" class="nav-link">News & Updates</a></li>
+                    <li class="nav-item"><a href="{% url 'home' %}#faqs" class="nav-link">FAQs</a></li>
                 </ul>
             </div>
         </nav>
@@ -49,7 +51,7 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <main class="auth-main">
+    <main class="auth-main" id="main-content">
         <div class="auth-wrapper">
             <div class="auth-card">
                 <div class="auth-header">
@@ -75,7 +77,7 @@
                 <div class="auth-content">
                     <!-- Login Form -->
                     <div class="tab-pane active" id="login">
-                        <form id="login-form" class="auth-form" method="post" action="{% url 'login' %}" novalidate>
+                        <form id="login-form" class="auth-form" method="post" action="{% url 'auth' %}" novalidate>
                             {% csrf_token %}
                             <div class="input-group">
                                 <div class="input-wrapper">
@@ -98,7 +100,7 @@
                                     <span class="checkmark"></span>
                                     Remember Me
                                 </label>
-                                <a href="{% url 'forgot_password' %}" class="forgot-password" data-modal="forgot-password-modal">Forgot Password?</a>
+                                <a href="#" class="forgot-password" data-modal="forgot-password-modal">Forgot Password?</a>
                             </div>
                             <button type="submit" class="auth-btn btn-primary">
                                 <i class="fas fa-sign-in-alt"></i>
@@ -110,7 +112,7 @@
 
                     <!-- Register Form -->
                     <div class="tab-pane" id="register" style="display: none;">
-                        <form id="register-form" class="auth-form" method="post" action="{% url 'register' %}" novalidate>
+                        <form id="register-form" class="auth-form" method="post" action="{% url 'auth' %}" novalidate>
                             {% csrf_token %}
                             <div class="input-group">
                                 <div class="input-wrapper">
@@ -170,7 +172,8 @@
                 <h3 id="forgot-password-title">Forgot Password</h3>
             </div>
             <p class="modal-description">Enter your email address and we'll send you a link to reset your password.</p>
-            <form id="forgot-password-form" class="auth-form" novalidate>
+            <form id="forgot-password-form" class="auth-form" method="post" action="{% url 'auth' %}" novalidate>
+                {% csrf_token %}
                 <div class="input-group">
                     <div class="input-wrapper">
                         <i class="fas fa-envelope input-icon"></i>
@@ -200,7 +203,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated October 22, 2025.</p>
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated November 02, 2025.</p>
             <p class="privacy-notice">Your privacy is our priority. <a href="#" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
             <div class="social-links">
                 <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>

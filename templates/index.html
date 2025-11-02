@@ -1,4 +1,5 @@
 {% load static %}
+<!-- Full Updated index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +10,17 @@
     <meta name="keywords" content="vaccine scheduler, Nepal health, child vaccination, reminders, maternal health">
     <meta property="og:title" content="Mero Khop - Vaccine Reminders & Scheduler">
     <meta property="og:description" content="Personalized vaccine schedules and reminders for families in Nepal.">
-    <meta property="og:image" content="assets/logo.svg">
+    <meta property="og:image" content="{% static 'assets/logo.svg' %}">
     <meta property="og:url" content="https://merokhop.com">
     <title>मेरो खोप - Vaccine Reminders & Scheduler</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
-    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="{% static 'assets/logo.svg' %}" type="image/svg+xml">
 </head>
 <body data-theme="light">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header">
         <nav class="navbar">
             <div class="navbar-container">
@@ -62,7 +62,7 @@
                     <li class="nav-item"><a href="#scheduler" class="nav-link">Scheduler</a></li>
                     <li class="nav-item"><a href="#news" class="nav-link">News & Updates</a></li>
                     <li class="nav-item"><a href="#faqs" class="nav-link">FAQs</a></li>
-                    <li class="nav-item"><a href="auth.html" class="nav-link btn-primary">Login/Register</a></li>
+                    <li class="nav-item"><a href="{% url 'auth' %}" class="nav-link btn-primary">Login/Register</a></li>
                 </ul>
             </div>
         </nav>
@@ -75,9 +75,9 @@
     <main id="main-content">
         <section id="home" class="hero-section" data-aos="fade-in">
             <div class="hero-background">
-                <video autoplay muted loop playsinline poster="assets/hero-placeholder.webp">
-                    <source src="assets/hero-video.webm" type="video/webm">
-                    <img src="assets/hero-placeholder.webp" alt="Fallback Hero Image" loading="lazy">
+                <video autoplay muted loop playsinline poster="{% static 'assets/hero-placeholder.webp' %}">
+                    <source src="{% static 'assets/hero-video.webm' %}" type="video/webm">
+                    <img src="{% static 'assets/hero-placeholder.webp' %}" alt="Fallback Hero Image" loading="lazy">
                 </video>
             </div>
             <div class="hero-overlay"></div>
@@ -110,7 +110,7 @@
                                             <h4 class="card-title">BCG</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/bcg.webp" alt="BCG Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/bcg.webp' %}" alt="BCG Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Administered at birth to protect against tuberculosis.</p>
@@ -125,7 +125,7 @@
                                             <h4 class="card-title">Pentavalent (DPT-HepB-Hib)</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/pentavalent.webp" alt="Pentavalent Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/pentavalent.webp' %}" alt="Pentavalent Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Doses at 6, 10, 14 weeks. Protects against diphtheria, pertussis, tetanus, hepatitis B, Haemophilus influenzae type b.</p>
@@ -140,7 +140,7 @@
                                             <h4 class="card-title">OPV</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/opv.webp" alt="OPV Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/opv.webp' %}" alt="OPV Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Oral doses at 6, 10, 14 weeks to prevent polio.</p>
@@ -155,7 +155,7 @@
                                             <h4 class="card-title">PCV</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/pcv.webp" alt="PCV Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/pcv.webp' %}" alt="PCV Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Doses at 6, 10 weeks, booster at 9 months. Protects against pneumococcal diseases.</p>
@@ -170,7 +170,7 @@
                                             <h4 class="card-title">fIPV</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/fipv.webp" alt="fIPV Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/fipv.webp' %}" alt="fIPV Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Doses at 14 weeks and 9 months to prevent polio.</p>
@@ -185,7 +185,7 @@
                                             <h4 class="card-title">MR</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/mr.webp" alt="MR Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/mr.webp' %}" alt="MR Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Doses at 9 and 15 months to protect against measles and rubella.</p>
@@ -200,7 +200,7 @@
                                             <h4 class="card-title">JE</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/je.webp" alt="JE Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/je.webp' %}" alt="JE Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Dose at 12 months in endemic areas to protect against Japanese encephalitis.</p>
@@ -215,7 +215,7 @@
                                             <h4 class="card-title">TCV</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/tcv.webp" alt="TCV Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/tcv.webp' %}" alt="TCV Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Dose at 15 months to protect against typhoid fever.</p>
@@ -230,7 +230,7 @@
                                             <h4 class="card-title">HPV</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/hpv.webp" alt="HPV Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/hpv.webp' %}" alt="HPV Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Single dose for girls aged 9-14 years to prevent cervical cancer.</p>
@@ -257,7 +257,7 @@
                                             <h4 class="card-title">Td</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/td.webp" alt="Td Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/td.webp' %}" alt="Td Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">For pregnant women: 2 doses in first pregnancy, 1 dose in subsequent to protect against tetanus and diphtheria.</p>
@@ -272,7 +272,7 @@
                                             <h4 class="card-title">Tdap</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/tdap.webp" alt="Tdap Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/tdap.webp' %}" alt="Tdap Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Dose during pregnancy to protect against pertussis.</p>
@@ -287,7 +287,7 @@
                                             <h4 class="card-title">Flu</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/flu.webp" alt="Flu Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/flu.webp' %}" alt="Flu Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Recommended for pregnant women to protect against influenza.</p>
@@ -302,7 +302,7 @@
                                             <h4 class="card-title">COVID-19</h4>
                                         </div>
                                         <div class="vaccine-card-image">
-                                            <img src="assets/covid.webp" alt="COVID-19 Vaccine" loading="lazy">
+                                            <img src="{% static 'assets/covid.webp' %}" alt="COVID-19 Vaccine" loading="lazy">
                                         </div>
                                         <div class="vaccine-card-content">
                                             <p class="card-description">Safe and recommended for pregnant women.</p>
@@ -327,7 +327,8 @@
                     <p class="section-subtitle">Generate your custom vaccination timeline based on Nepal's guidelines.</p>
                 </div>
                 <div class="scheduler-wrapper">
-                    <form id="scheduler-form" class="scheduler-form">
+                    <form id="scheduler-form" class="scheduler-form" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label class="form-label">Select Type</label>
                             <input type="radio" id="child" name="type" value="child" checked> Child
@@ -385,7 +386,7 @@
                                         <h4 class="card-title">New Tdap Guidelines for 2025</h4>
                                     </div>
                                     <div class="news-card-image">
-                                        <img src="assets/news-tdap.webp" alt="New Tdap Guidelines" loading="lazy">
+                                        <img src="{% static 'assets/news-tdap.webp' %}" alt="New Tdap Guidelines" loading="lazy">
                                     </div>
                                     <div class="news-card-content">
                                         <p class="news-date">October 14, 2025</p>
@@ -400,7 +401,7 @@
                                         <h4 class="card-title">Postpartum Vaccine Campaign in Nepal</h4>
                                     </div>
                                     <div class="news-card-image">
-                                        <img src="assets/news-mmr.webp" alt="Postpartum Vaccine Campaign" loading="lazy">
+                                        <img src="{% static 'assets/news-mmr.webp' %}" alt="Postpartum Vaccine Campaign" loading="lazy">
                                     </div>
                                     <div class="news-card-content">
                                         <p class="news-date">October 10, 2025</p>
@@ -415,7 +416,7 @@
                                         <h4 class="card-title">COVID-19 Booster Recommendations</h4>
                                     </div>
                                     <div class="news-card-image">
-                                        <img src="assets/news-covid.webp" alt="COVID-19 Booster Recommendations" loading="lazy">
+                                        <img src="{% static 'assets/news-covid.webp' %}" alt="COVID-19 Booster Recommendations" loading="lazy">
                                     </div>
                                     <div class="news-card-content">
                                         <p class="news-date">October 1, 2025</p>
@@ -504,7 +505,7 @@
             <h3 id="bcg-title">BCG Vaccine Details</h3>
             <p>Administered at birth to protect against tuberculosis. Side effects may include a small scar at injection site. Consult doctor if fever persists.</p>
             <video controls preload="metadata">
-                <source src="assets/bcg-video.webm" type="video/webm">
+                <source src="{% static 'assets/bcg-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -515,7 +516,7 @@
             <h3 id="pentavalent-title">Pentavalent Vaccine Details</h3>
             <p>Protects against five diseases. Given in three doses. Common side effects: mild fever, soreness.</p>
             <video controls preload="metadata">
-                <source src="assets/pentavalent-video.webm" type="video/webm">
+                <source src="{% static 'assets/pentavalent-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -526,7 +527,7 @@
             <h3 id="opv-title">OPV Vaccine Details</h3>
             <p>Oral polio vaccine. Easy administration. Helps eradicate polio in Nepal.</p>
             <video controls preload="metadata">
-                <source src="assets/opv-video.webm" type="video/webm">
+                <source src="{% static 'assets/opv-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -537,7 +538,7 @@
             <h3 id="pcv-title">PCV Vaccine Details</h3>
             <p>Pneumococcal conjugate vaccine. Prevents pneumonia and meningitis.</p>
             <video controls preload="metadata">
-                <source src="assets/pcv-video.webm" type="video/webm">
+                <source src="{% static 'assets/pcv-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -548,7 +549,7 @@
             <h3 id="fipv-title">fIPV Vaccine Details</h3>
             <p>Fractional inactivated polio vaccine. Booster for polio protection.</p>
             <video controls preload="metadata">
-                <source src="assets/fipv-video.webm" type="video/webm">
+                <source src="{% static 'assets/fipv-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -559,7 +560,7 @@
             <h3 id="mr-title">MR Vaccine Details</h3>
             <p>Measles-Rubella vaccine. Two doses for full immunity.</p>
             <video controls preload="metadata">
-                <source src="assets/mr-video.webm" type="video/webm">
+                <source src="{% static 'assets/mr-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -570,7 +571,7 @@
             <h3 id="je-title">JE Vaccine Details</h3>
             <p>Japanese Encephalitis vaccine. Crucial in endemic regions.</p>
             <video controls preload="metadata">
-                <source src="assets/je-video.webm" type="video/webm">
+                <source src="{% static 'assets/je-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -581,7 +582,7 @@
             <h3 id="tcv-title">TCV Vaccine Details</h3>
             <p>Typhoid conjugate vaccine. Protects against typhoid fever.</p>
             <video controls preload="metadata">
-                <source src="assets/tcv-video.webm" type="video/webm">
+                <source src="{% static 'assets/tcv-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -592,7 +593,7 @@
             <h3 id="hpv-title">HPV Vaccine Details</h3>
             <p>Human Papillomavirus vaccine. Prevents cervical cancer in girls.</p>
             <video controls preload="metadata">
-                <source src="assets/hpv-video.webm" type="video/webm">
+                <source src="{% static 'assets/hpv-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -603,7 +604,7 @@
             <h3 id="td-title">Td Vaccine Details</h3>
             <p>Tetanus-Diphtheria vaccine for pregnant women.</p>
             <video controls preload="metadata">
-                <source src="assets/td-video.webm" type="video/webm">
+                <source src="{% static 'assets/td-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -614,7 +615,7 @@
             <h3 id="tdap-title">Tdap Vaccine Details</h3>
             <p>Tdap for pertussis protection during pregnancy.</p>
             <video controls preload="metadata">
-                <source src="assets/tdap-video.webm" type="video/webm">
+                <source src="{% static 'assets/tdap-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -625,7 +626,7 @@
             <h3 id="flu-title">Flu Vaccine Details</h3>
             <p>Influenza vaccine recommended for pregnant women.</p>
             <video controls preload="metadata">
-                <source src="assets/flu-video.webm" type="video/webm">
+                <source src="{% static 'assets/flu-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -636,7 +637,7 @@
             <h3 id="covid-title">COVID-19 Vaccine Details</h3>
             <p>Safe COVID-19 vaccines for pregnant women.</p>
             <video controls preload="metadata">
-                <source src="assets/covid-video.webm" type="video/webm">
+                <source src="{% static 'assets/covid-video.webm' %}" type="video/webm">
                 <p>Video unavailable. Please contact support for more details.</p>
             </video>
         </div>
@@ -675,6 +676,6 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
