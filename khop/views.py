@@ -1,53 +1,63 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from .models import Vaccine, News
+from .forms import RegistrationForm, LoginForm, ForgotPasswordForm
 
-def index(request):
-    return render(request, 'index.html')
+def home(request):
+    child_vaccines = Vaccine.objects.filter(category='child')
+    maternal_vaccines = Vaccine.objects.filter(category='maternal')
+    news_items = News.objects.order_by('-date')[:3]  # Latest 3
+    context = {
+        'child_vaccines': child_vaccines,
+        'maternal_vaccines': maternal_vaccines,
+        'news_items': news_items,
+    }
+    return render(request, 'index.html', context)
 
 def auth_view(request):
-    return render(request, 'auth.html')
-
-def login_view(request):
     if request.method == 'POST':
-        email = request.POST['login-email']
-        password = request.POST['login-password']
-        user = authenticate(request, username=email, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'Login successful!')
-            return redirect('index')
-        else:
-            messages.error(request, 'Invalid credentials.')
-    return redirect('auth')
-
-def register_view(request):
-    if request.method == 'POST':
-        name = request.POST['register-name']
-        email = request.POST['register-email']
-        password = request.POST['register-password']
-        confirm_password = request.POST['confirm-password']
-        if password == confirm_password:
-            if User.objects.filter(username=email).exists():
-                messages.error(request, 'Email already exists.')
-            else:
-                user = User.objects.create_user(username=email, email=email, password=password)
-                user.first_name = name
-                user.save()
-                messages.success(request, 'Registration successful! Please login.')
-                return redirect('auth')
-        else:
-            messages.error(request, 'Passwords do not match.')
-    return redirect('auth')
+        if 'login' in request.POST:
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                user = authenticate(username=username, password=password)
+                if user:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    messages.error(request, 'Invalid credentials')
+        elif 'register' in request.POST:
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Registration successful. Please log in.')
+        elif 'forgot' in request.POST:
+            form = ForgotPasswordForm(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data['email']
+                # Simple reset logic (send email with dummy link for dev)
+                send_mail(
+                    'Password Reset',
+                    'Click here to reset: http://example.com/reset',  # Replace with real logic in prod
+                    'from@example.com',
+                    [email]
+                )
+                messages.success(request, 'Reset link sent to email.')
+    login_form = LoginForm()
+    register_form = RegistrationForm()
+    forgot_form = ForgotPasswordForm()
+    context = {
+        'login_form': login_form,
+        'register_form': register_form,
+        'forgot_form': forgot_form,
+    }
+    return render(request, 'auth.html', context)
 
 def logout_view(request):
     logout(request)
-    messages.success(request, 'Logged out successfully.')
-    return redirect('index')
+    return redirect('home')
 
-def forgot_password(request):
-    # Implement password reset logic here (use Django's built-in password reset views for production)
-    messages.info(request, 'Password reset link sent to your email.')
-    return redirect('auth')
+# Add scheduler view as before if needed, fetching from DB

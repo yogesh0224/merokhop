@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="मेरो खोप: Professional vaccine reminders and scheduling for child health in Nepal.">
+    <meta name="author" content="Mero Khop Team">
+    <meta name="keywords" content="vaccine scheduler, Nepal health, child vaccination, reminders, maternal health">
+    <meta property="og:title" content="Mero Khop - Vaccine Reminders & Scheduler">
+    <meta property="og:description" content="Personalized vaccine schedules and reminders for families in Nepal.">
+    <meta property="og:image" content="assets/logo.svg">
+    <meta property="og:url" content="https://merokhop.com">
+    <title>{% block title %}मेरो खोप - Vaccine Reminders & Scheduler{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+    <link rel="icon" href="{% static 'assets/logo.svg' %}" type="image/svg+xml">
+</head>
+<body data-theme="light">
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <svg class="navbar-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" aria-label="Mero Khop Logo: Shield with Syringe">
+                        <path d="M20 20 Q20 10 30 10 H70 Q80 10 80 20 V60 Q80 70 70 70 L50 90 L30 70 Q20 60 20 50 Z" stroke="var(--primary-color)" stroke-width="4" fill="none"/>
+                        <rect x="40" y="30" width="40" height="4" fill="var(--primary-color)"/>
+                        <line x1="40" y1="30" x2="40" y2="20" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="80" y1="32" x2="90" y2="32" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="90" y1="32" x2="85" y2="28" stroke="var(--primary-color)" stroke-width="4"/>
+                        <line x1="90" y1="32" x2="85" y2="36" stroke="var(--primary-color)" stroke-width="4"/>
+                    </svg>
+                    <a href="{% url 'home' %}" class="navbar-logo nepal-font">मेरो खोप</a>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li class="nav-item has-dropdown">
+                        <a href="#vaccines" class="nav-link dropdown-toggle">Vaccines</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#child-vaccines" class="dropdown-link">Childhood Vaccines</a></li>
+                            <li><a href="#maternal-vaccines" class="dropdown-link">Maternal Vaccines</a></li>
+                            <!-- Dynamic dropdown items can be added if needed -->
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="#scheduler" class="nav-link">Scheduler</a></li>
+                    <li class="nav-item"><a href="#news" class="nav-link">News & Updates</a></li>
+                    <li class="nav-item"><a href="#faqs" class="nav-link">FAQs</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a href="{% url 'auth' %}" class="nav-link btn-primary">Login/Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Mero Khop. All rights reserved. Compliant with Nepal MoHP standards, last updated November 02, 2025.</p>
+            <p class="privacy-notice">Your privacy is our priority. <a href="#" data-modal="privacy-modal">Read our Privacy Policy</a>.</p>
+            <div class="social-links">
+                <a href="https://facebook.com/merokhop" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/merokhop" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/merokhop" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal" role="dialog" aria-labelledby="privacy-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <i class="fas fa-lock"></i>
+                <h3 id="privacy-title">Privacy Policy</h3>
+            </div>
+            <p class="modal-description">We protect your data with end-to-end encryption and never share without consent. Compliant with Nepal's health privacy standards.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
+</body>
+</html>
