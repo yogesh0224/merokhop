@@ -1,14 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
-from .models import Vaccine, News
+from django.http import HttpResponse
+from .models import Vaccine, News, UserSchedule, ScheduleItem
 from .forms import RegistrationForm, LoginForm, ForgotPasswordForm
+from datetime import timedelta
+from dateutil.relativedelta import relativedelta
+import icalendar
 
 def home(request):
     child_vaccines = Vaccine.objects.filter(category='child')
     maternal_vaccines = Vaccine.objects.filter(category='maternal')
-    news_items = News.objects.order_by('-date')[:3]  # Latest 3
+    news_items = News.objects.order_by('-date')[:3]
     context = {
         'child_vaccines': child_vaccines,
         'maternal_vaccines': maternal_vaccines,
@@ -26,6 +31,7 @@ def auth_view(request):
                 user = authenticate(username=username, password=password)
                 if user:
                     login(request, user)
+                    messages.success(request, 'Login successful!')
                     return redirect('home')
                 else:
                     messages.error(request, 'Invalid credentials')
@@ -38,12 +44,12 @@ def auth_view(request):
             form = ForgotPasswordForm(request.POST)
             if form.is_valid():
                 email = form.cleaned_data['email']
-                # Simple reset logic (send email with dummy link for dev)
                 send_mail(
                     'Password Reset',
-                    'Click here to reset: http://example.com/reset',  # Replace with real logic in prod
-                    'from@example.com',
-                    [email]
+                    'Click here to reset: http://example.com/reset',  # Replace with token-based reset in prod
+                    'noreply@merokhop.com',
+                    [email],
+                    fail_silently=False,
                 )
                 messages.success(request, 'Reset link sent to email.')
     login_form = LoginForm()
@@ -58,6 +64,78 @@ def auth_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, 'Logged out successfully.')
     return redirect('home')
 
-# Add scheduler view as before if needed, fetching from DB
+@login_required
+def scheduler(request):
+    if request.method == 'POST':
+        schedule_type = request.POST.get('type')
+        reference_date = request.POST.get('dob')
+        user_schedule, created = UserSchedule.objects.get_or_create(
+            user=request.user, type=schedule_type, defaults={'reference_date': reference_date}
+        )
+        if not created:
+            user_schedule.reference_date = reference_date
+            user_schedule.save()
+            ScheduleItem.objects.filter(schedule=user_schedule).delete()
+
+        vaccines = Vaccine.objects.filter(category=schedule_type[:5])
+        schedule_details = []
+        for vaccine in vaccines:
+            # Parse dose_schedule (assume format like "6" for months/weeks)
+            try:
+                offset = int(vaccine.dose_schedule.split()[0])
+            except:
+                offset = 0
+            if schedule_type == 'child':
+                due_date = user_schedule.reference_date + relativedelta(months=offset)
+            else:
+                due_date = user_schedule.reference_date - timedelta(weeks=offset)
+            item = ScheduleItem.objects.create(schedule=user_schedule, vaccine=vaccine, due_date=due_date)
+            schedule_details.append(f"{vaccine.name} due on {due_date}")
+
+        # Send notification email
+        email_body = "Your schedule has been saved. Upcoming vaccines:\n" + "\n".join(schedule_details)
+        send_mail(
+            'Your Vaccine Schedule - Mero Khop',
+            email_body,
+            'noreply@merokhop.com',
+            [request.user.email],
+            fail_silently=False,
+        )
+        messages.success(request, 'Schedule saved and notification sent!')
+
+        return redirect('scheduler')
+
+    user_schedule = UserSchedule.objects.filter(user=request.user).first()
+    schedule_items = ScheduleItem.objects.filter(schedule=user_schedule) if user_schedule else []
+    context = {'schedule_items': schedule_items, 'user_schedule': user_schedule}
+    return render(request, 'index.html', context)  # Or 'scheduler.html' if separate
+
+@login_required
+def mark_taken(request, item_id):
+    item = ScheduleItem.objects.get(id=item_id, schedule__user=request.user)
+    item.taken = not item.taken
+    item.save()
+    return redirect('scheduler')
+
+@login_required
+def export_schedule(request):
+    user_schedule = UserSchedule.objects.filter(user=request.user).first()
+    if not user_schedule:
+        return HttpResponse("No schedule found", status=404)
+
+    cal = icalendar.Calendar()
+    cal.add('prodid', '-//MeroKhop//EN')
+    cal.add('version', '2.0')
+
+    for item in ScheduleItem.objects.filter(schedule=user_schedule):
+        event = icalendar.Event()
+        event.add('summary', f"{item.vaccine.name} Due")
+        event.add('dtstart', item.due_date)
+        cal.add_component(event)
+
+    response = HttpResponse(cal.to_ical(), content_type='text/calendar')
+    response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
+    return response

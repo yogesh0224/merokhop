@@ -129,3 +129,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'  # Redirect to home after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect to home after logout
 LOGIN_URL = '/auth/'  # Redirect to auth page if not logged in
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For dev; change to SMTP for prod
+EMAIL_HOST = 'localhost'  # For prod: 'smtp.gmail.com', etc.
+EMAIL_PORT = 1025
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'noreply@merokhop.com'

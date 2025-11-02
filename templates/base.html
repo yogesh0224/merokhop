@@ -1,3 +1,4 @@
+<!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,10 +44,9 @@
                         <ul class="dropdown-menu">
                             <li><a href="#child-vaccines" class="dropdown-link">Childhood Vaccines</a></li>
                             <li><a href="#maternal-vaccines" class="dropdown-link">Maternal Vaccines</a></li>
-                            <!-- Dynamic dropdown items can be added if needed -->
                         </ul>
                     </li>
-                    <li class="nav-item"><a href="#scheduler" class="nav-link">Scheduler</a></li>
+                    <li class="nav-item"><a href="{% url 'scheduler' %}" class="nav-link">Scheduler</a></li>
                     <li class="nav-item"><a href="#news" class="nav-link">News & Updates</a></li>
                     <li class="nav-item"><a href="#faqs" class="nav-link">FAQs</a></li>
                     {% if user.is_authenticated %}
