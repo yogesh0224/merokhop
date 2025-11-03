@@ -113,18 +113,18 @@
             <div class="slider-container">
                 <div class="swiper news-slider">
                     <div class="swiper-wrapper">
-                        {% for news in news_items %}
-                            <div class="swiper-slide">
-                                <article class="news-card">
-                                    <div class="news-card-header">
-                                        <h4 class="card-title">{{ news.title }}</h4>
-                                    </div>
-                                    <div class="news-card-image">
-                                        {% if news.image %}
-                                            <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy">
-                                        {% else %}
-                                            <img src="{% static 'assets/placeholder.webp' %}" alt="Placeholder" loading="lazy">
-                                        {% endif %}
+                    {% for news in news_items %}
+                        <div class="swiper-slide">
+                            <article class="news-card">
+                                <div class="news-card-header">
+                                    <h4 class="card-title">{{ news.title }}</h4>
+                                </div>
+                                <div class="news-card-image">
+                                    {% if news.image %}
+                                        <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy">
+                                    {% else %}
+                                        <img src="{% static 'assets/placeholder.webp' %}" alt="Placeholder" loading="lazy">
+                                    {% endif %}
                                     </div>
                                     <div class="news-card-content">
                                         <p class="news-date">{{ news.date|date:"F j, Y" }}</p>
