@@ -20,6 +20,7 @@
     <link rel="icon" href="{% static 'assets/logo.svg' %}" type="image/svg+xml">
 </head>
 <body data-theme="light">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header">
         <nav class="navbar">
             <div class="navbar-container">
@@ -63,6 +64,13 @@
     </button>
 
     <main id="main-content">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
 

@@ -26,35 +26,51 @@ def home(request):
 @csrf_protect
 def auth_view(request):
     if request.method == 'POST':
+        print("POST received for auth:", request.POST)  # Debug: Check incoming data
         if 'login' in request.POST:
             form = LoginForm(request.POST)
+            print("Login form data:", form.data)  # Debug
             if form.is_valid():
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password']
-                user = authenticate(username=username, password=password)
-                if user:
+                print(f"Auth attempt for {username}")  # Debug
+                user = authenticate(request, username=username, password=password)
+                print(f"Auth result: {user}")  # Debug: None or User object
+                if user is not None:
                     login(request, user)
                     messages.success(request, 'Login successful!')
                     return redirect('home')
                 else:
-                    messages.error(request, 'Invalid credentials')
+                    messages.error(request, 'Invalid username or password.')
+            else:
+                print("Login form errors:", form.errors)  # Debug
+                messages.error(request, 'Form validation failed. Check fields.')
         elif 'register' in request.POST:
             form = RegistrationForm(request.POST)
+            print("Register form data:", form.data)  # Debug
             if form.is_valid():
-                form.save()
-                messages.success(request, 'Registration successful. Please log in.')
+                user = form.save()
+                print(f"User registered: {user.username}, is_active: {user.is_active}")  # Debug
+                messages.success(request, 'Registration successful. You can now log in.')
+            else:
+                print("Register form errors:", form.errors)  # Debug
+                messages.error(request, 'Registration failed. Check errors below.')
         elif 'forgot' in request.POST:
             form = ForgotPasswordForm(request.POST)
             if form.is_valid():
                 email = form.cleaned_data['email']
+                print(f"Forgot password for email: {email}")  # Debug
                 send_mail(
                     'Password Reset',
-                    'Click here to reset: http://example.com/reset',  # Replace with token-based reset in prod
+                    'Click here to reset: http://example.com/reset',  # Replace with real link
                     'noreply@merokhop.com',
                     [email],
                     fail_silently=False,
                 )
-                messages.success(request, 'Reset link sent to email.')
+                messages.success(request, 'Reset link sent to your email (check console for dev).')
+            else:
+                messages.error(request, 'Invalid email.')
+
     login_form = LoginForm()
     register_form = RegistrationForm()
     forgot_form = ForgotPasswordForm()
