@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 class Vaccine(models.Model):
     CATEGORY_CHOICES = [
@@ -9,7 +10,7 @@ class Vaccine(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
-    dose_schedule = models.TextField()  # e.g., "Doses at 6, 10, 14 weeks"
+    dose_schedule = models.TextField()  # e.g., "6, 10, 14" for months/weeks
     image = models.ImageField(upload_to='vaccines/', blank=True, null=True)
     video = models.FileField(upload_to='videos/', blank=True, null=True)
 
@@ -39,3 +40,12 @@ class ScheduleItem(models.Model):
     vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
     due_date = models.DateField()
     taken = models.BooleanField(default=False)
+
+    def get_status(self):
+        today = date.today()
+        if self.due_date < today:
+            return 'past'
+        elif self.due_date == today:
+            return 'due-today'
+        else:
+            return 'upcoming'

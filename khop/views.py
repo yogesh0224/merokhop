@@ -10,6 +10,7 @@ from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 import icalendar
 from django.views.decorators.csrf import csrf_protect
+import re
 
 @csrf_protect
 def home(request):
@@ -92,6 +93,9 @@ def scheduler(request):
     if request.method == 'POST':
         schedule_type = request.POST.get('type')
         reference_date = request.POST.get('dob')
+        if not reference_date:
+            messages.error(request, 'Please enter a valid date.')
+            return redirect('scheduler')
         user_schedule, created = UserSchedule.objects.get_or_create(
             user=request.user, type=schedule_type, defaults={'reference_date': reference_date}
         )
@@ -101,19 +105,24 @@ def scheduler(request):
             ScheduleItem.objects.filter(schedule=user_schedule).delete()
 
         vaccines = Vaccine.objects.filter(category=schedule_type[:5])
+        if not vaccines:
+            messages.error(request, 'No vaccines found for this category. Add in admin.')
+            return redirect('scheduler')
+
         schedule_details = []
         for vaccine in vaccines:
-            # Parse dose_schedule (assume format like "6" for months/weeks)
-            try:
-                offset = int(vaccine.dose_schedule.split()[0])
-            except:
-                offset = 0
-            if schedule_type == 'child':
-                due_date = user_schedule.reference_date + relativedelta(months=offset)
-            else:
-                due_date = user_schedule.reference_date - timedelta(weeks=offset)
-            item = ScheduleItem.objects.create(schedule=user_schedule, vaccine=vaccine, due_date=due_date)
-            schedule_details.append(f"{vaccine.name} due on {due_date}")
+            # Parse all numbers from dose_schedule
+            offsets = re.findall(r'\d+', vaccine.dose_schedule)
+            if not offsets:
+                offsets = [0]  # Default for "At birth"
+            for offset_str in offsets:
+                offset = int(offset_str)
+                if schedule_type == 'child':
+                    due_date = user_schedule.reference_date + relativedelta(months=offset)
+                else:
+                    due_date = user_schedule.reference_date - timedelta(weeks=offset)
+                item = ScheduleItem.objects.create(schedule=user_schedule, vaccine=vaccine, due_date=due_date)
+                schedule_details.append(f"{vaccine.name} due on {due_date}")
 
         # Send notification email
         email_body = "Your schedule has been saved. Upcoming vaccines:\n" + "\n".join(schedule_details)
